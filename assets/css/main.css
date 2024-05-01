@@ -2914,6 +2914,8 @@ input, select, textarea {
 
 	}
 
+	/* wheel */
+
 	#container {
 		display: flex;
 		justify-content: center;
@@ -2921,10 +2923,11 @@ input, select, textarea {
 		height: 100vh;
 	}
 	#wheelTitle{
-		color: #32A0E0ff;
+		color: var(--accent-blue);
 		font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 		font-size: 40px;
 		font-weight: bold;
+		line-height: 40px;
 	}
 
 	.popup {
@@ -2933,8 +2936,9 @@ input, select, textarea {
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
-		background-color: #f4f4f4;
+		background-color: var(--white);
 		padding: 20px;
+		font-size: larger;
 		border: 1px solid #ccc;
 		border-radius: 7px;
 		color: black;
@@ -2948,12 +2952,20 @@ input, select, textarea {
 		left: 0;
 		width: 100%;
 		height: 100%;
-		background-color: rgba(0, 0, 0, 0.5);
+		background-color: rgba(0, 0, 0, 0.697);
 		z-index: 9998;
 	}
 	
 	.popup-content {
 		text-align: center;
+		
+	}
+
+	.popuptxt {
+		font-weight: 600;
+		font-size: 20pt;
+		margin: 10px;
+		margin-bottom: 20px;
 	}
 	
 	
@@ -2986,10 +2998,6 @@ input, select, textarea {
 		box-sizing: border-box;
 	}
 
-	.inAppBody {
-		margin: 30px;
-	}
-
 	.center
 	{
 		position: absolute;
@@ -2998,6 +3006,12 @@ input, select, textarea {
 		transform: translate(-50%, -50%);
 		padding: 10px;
 		text-align: center;
+		z-index: -1;
+	}
+
+	
+	.inAppBody {
+		margin: 30px;
 	}
 
 	/* jeopardy */
