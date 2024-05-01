@@ -142,6 +142,12 @@ input, select, textarea {
 		text-decoration: none;
 	}
 
+	h1 {
+		font-size: 2.5em;
+		margin: 10px;
+		text-align: center;
+	}
+
 	h2 {
 		font-size: 1.5em;
 	}
@@ -1443,13 +1449,18 @@ input, select, textarea {
 
 	input {
 		background-color: var(--light-gray);
-		color: var(--pale-blue);
+		color: var(--white);
 	}
 
 	input[type=text]{
-		width: 50px;
+		margin-top: 10px;
+		margin-right: 10px;
 		color: var(--white);
+		border: 0;
+		border-radius: 5px;
 	}
+
+	
 
 
 /* Form */
@@ -1534,7 +1545,7 @@ input, select, textarea {
 
 /* Section/Article */
 
-	section, article {
+	article {
 		margin-bottom: 2.5em;
 	}
 
@@ -1638,7 +1649,7 @@ input, select, textarea {
 		input[type="reset"]:hover,
 		button:hover,
 		.button:hover {
-			background: var(--pale-blue);
+			background: var(--pale-blue-hover);
 		}
 
 		input[type="button"]:active,
@@ -1662,7 +1673,7 @@ input, select, textarea {
 			input[type="reset"].alt:hover,
 			button.alt:hover,
 			.button.alt:hover {
-				background: var(--pale-blue);
+				background: var(--pale-blue-hover);
 			}
 
 			input[type="button"].alt:active,
@@ -2084,6 +2095,19 @@ input, select, textarea {
 			font-size: 2.5em;
 			letter-spacing: -0.035em;
 			line-height: 1;
+			justify-content: flex;
+		}
+	
+		#headerInApp h2 {
+			text-align: center;
+			position: relative;
+			background:  var(--accent-blue);	
+			padding: 1.5em 0 1.5em 0;
+			color: #252122;
+			font-weight: 900;
+			font-size: 2.5em;
+			letter-spacing: -0.035em;
+
 		}
 
 /* Nav */
@@ -2119,7 +2143,7 @@ input, select, textarea {
 				}
 
 				#nav > ul > li:hover > a, #nav > ul > li.active > a {
-					background: #f3f3f3;
+					background: var(--accent-blue-hover);
 				}
 
 				#nav > ul > li.current > a {
@@ -2922,6 +2946,7 @@ input, select, textarea {
 		align-items: center;
 		height: 100vh;
 	}
+
 	#wheelTitle{
 		color: var(--accent-blue);
 		font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -3034,7 +3059,9 @@ input, select, textarea {
 		
 		--white: #EEEEEE;
 		--accent-blue: #38B6FF;
+		--accent-blue-hover: #3596ce;
 		--pale-blue: #76ABAE;
+		--pale-blue-hover: #558c8f;
 		--light-gray: #31363F;
 		--dark-gray: #222831;
 		--black: #111419;
@@ -3234,3 +3261,33 @@ input, select, textarea {
 		background: #2b2b31; /* Color of the scrollbar handle on hover */
 	}
   
+	/* bingo */
+	
+	#bingoContainer {
+		display: flex;
+		justify-content: center;
+		height: 100vh;
+	}
+
+	.bingoInput {
+		margin-left: 30px;
+		width: 40%;
+		height: 100%;
+		align-items: center;
+	}
+
+	.bingoInput input{
+		width: 17%;
+	}
+
+	.bingoPDF {
+		width: 60%;
+		height: 100%;
+	}
+
+	.embed-pdf {
+		width: 100%;
+		height: 500px;
+		/* Add any additional styles here */
+	}
+	
