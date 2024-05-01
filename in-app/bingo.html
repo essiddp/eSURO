@@ -81,8 +81,21 @@
         }
     }
     
-    async function createPdfMatrix(matrixSize, pdfFileName, pageCount) {
+    async function createPdfMatrix(matrixSize, pageCount) {
         // Load the PDF file
+        let pdfFileName;
+        switch (matrixSize) {
+            case 5:
+                pdfFileName = "bingo3.pdf"; // For 5x5, choose page 3
+                break;
+            case 4:
+                pdfFileName = "bingo2.pdf"; // For 4x4, choose page 2
+                break;
+            case 3:
+            default:
+                pdfFileName = "bingo1.pdf"; // For 3x3 (or default), choose page 1
+                break;
+        }
         const pdfBytes = await fetch(pdfFileName).then(res => res.arrayBuffer());
         const pdfDoc = await PDFLib.PDFDocument.load(pdfBytes);
         let [tempPDF] = await pdfDoc.copyPages(pdfDoc, [0]);
@@ -187,9 +200,8 @@
         const matrixSizeInput = document.getElementById('matrixSize');
         if (matrixSizeInput) {
             const matrixSize = parseInt(matrixSizeInput.value);
-            const pdfFileName = 'bingo.pdf'; // Specify the file name here
             const pageCount = parseInt(document.getElementById('pageCountInput').value);
-            const pdfDoc = await createPdfMatrix(matrixSize, pdfFileName, pageCount);
+            const pdfDoc = await createPdfMatrix(matrixSize, pageCount);
             const pdfBytes = await pdfDoc.save();
             const pdfBlob = new Blob([pdfBytes], { type: 'application/pdf' });
             const pdfUrl = URL.createObjectURL(pdfBlob);
