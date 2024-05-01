@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeopardy</title>
+    <link rel="stylesheet" href="../../assets/css/main.css">
+</head>
+<body>
+    <div class="splash-screen">
+        <div class="vertical-align">
+            <h1 style="font-size:40pt; color: #32A0E0ff">JEOPARDY!</h1>
+            <br>
+            <br>
+            <button class="edit-questions">EDIT</button>
+            <br>
+            <br>
+            <button class="play-game">PLAY</button>
+            <br>
+            <br>
+            <button onclick="window.location.href = '../../index.html'">HOME</button>
+        </div>
+    </div>
+
+    <script>
+        document.querySelector(".edit-questions").addEventListener("click", () => {
+            window.location.href = "questions.html";
+        });
+
+        document.querySelector(".play-game").addEventListener("click", () => {
+            window.location.href = "jeopardy.html";
+        });
+    </script>
+</body>
+</html>

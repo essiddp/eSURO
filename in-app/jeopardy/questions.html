@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <title>Edit Questions and Answers</title>
+</head>
+<body class="inAppBody" style="background-color: #222831;">
+    <div class="box" style="background-color:#111419; border-radius:15px">
+    <h1>Edit Questions and Answers</h1>
+    <form id="edit-questions-form">
+        
+        <input type="text" id="category-title" name="category-title" required />
+        <br>
+        <label for="category-title">Category Title</label>
+        <br />
+        <div id="clue-fields">
+            <!-- Initialize with three question fields -->
+            <div class="clue-field">
+                <label for="clue-0-question">Question:</label>
+                <input type="text" class="clue-question" name="clue-0-question" required />
+                <label for="clue-0-answer">Answer:</label>
+                <input type="text" class="clue-answer" name="clue-0-answer" required />
+            </div>
+            <div class="clue-field">
+                <label for="clue-1-question">Question:</label>
+                <input type="text" class="clue-question" name="clue-1-question" required />
+                <label for="clue-1-answer">Answer:</label>
+                <input type="text" class="clue-answer" name="clue-1-answer" required />
+            </div>
+            <div class="clue-field">
+                <label for="clue-2-question">Question:</label>
+                <input type="text" class="clue-question" name="clue-2-question" required />
+                <label for="clue-2-answer">Answer:</label>
+                <input type="text" class="clue-answer" name="clue-2-answer" required />
+                <button type="button" class="add-remove-button" onclick="addClueField(this)">+</button>
+            </div>
+        </div>
+        <!-- Add more clues as needed -->
+        <button type="button" id="add-button">Submit</button>
+        <button type="button" id="save-button" style="display: none;">Save Changes</button>
+    </form>
+</div>
+
+    <!-- Display saved categories/questions -->
+    <h2>Saved Categories/Questions:</h2>
+    <ul id="saved-categories"></ul>
+
+    <button class="AppButton" onclick="window.location.href = 'indexJeopardy.html'">BACK</button>
+
+    <script>
+        let clueCounter = 3; // Set the initial counter to 3
+
+        function addClueField(button) {
+            const parentDiv = button.parentElement;
+            const newClueField = document.createElement('div');
+            newClueField.classList.add('clue-field');
+            // Use the current clueCounter value to generate unique names
+            newClueField.innerHTML = `
+                <label for="clue-${clueCounter}-question">Question:</label>
+                <input type="text" class="clue-question" name="clue-${clueCounter}-question" required />
+                <label for="clue-${clueCounter}-answer">Answer:</label>
+                <input type="text" class="clue-answer" name="clue-${clueCounter}-answer" required />
+                <button type="button" class="add-remove-button" onclick="removeClueField(this)">–</button>
+            `;
+            parentDiv.appendChild(newClueField);
+            clueCounter++;
+        }
+
+        function removeClueField(button) {
+            const parentDiv = button.parentElement.parentElement;
+            parentDiv.removeChild(button.parentElement);
+            clueCounter--;
+        }
+
+        document.getElementById("add-button").addEventListener("click", () => {
+            document.getElementById("add-button").style.display = "block";
+            document.getElementById("save-button").style.display = "none";
+            addCategory();
+        });
+
+        document.getElementById("save-button").addEventListener("click", () => {
+            document.getElementById("add-button").style.display = "block";
+            document.getElementById("save-button").style.display = "none";
+            saveCategory();
+        });
+
+        function addCategory() {
+            const formData = getFormData();
+            if (formData) {
+                appendCategory(formData);
+                resetForm();
+                
+            }
+            
+        }
+
+        function saveCategory() {
+            const formData = getFormData();
+            if (formData) {
+                updateCategory(formData);
+                resetForm();
+                return false;
+            }
+        }
+
+        function getFormData() {
+            const formData = new FormData(document.getElementById("edit-questions-form"));
+            const categoryTitle = formData.get("category-title");
+            const clues = [];
+            for (let i = 0; i < clueCounter; i++) {
+                const question = formData.get(`clue-${i}-question`);
+                const answer = formData.get(`clue-${i}-answer`);
+                if (question && answer) {
+                    clues.push({ question, answer });
+                }
+            }
+            if (categoryTitle && clues.length > 0) {
+                return { categoryTitle, clues };
+            }
+            return null;
+        }
+
+        function appendCategory(formData) {
+            let jeopardyData = JSON.parse(localStorage.getItem("jeopardyData")) || [];
+            jeopardyData.push(formData);
+            localStorage.setItem("jeopardyData", JSON.stringify(jeopardyData));
+            loadSavedCategories();
+        }
+
+        function updateCategory(formData) {
+            let jeopardyData = JSON.parse(localStorage.getItem("jeopardyData")) || [];
+            const index = parseInt(document.getElementById("save-button").getAttribute("data-index"));
+            jeopardyData[index] = formData;
+            localStorage.setItem("jeopardyData", JSON.stringify(jeopardyData));
+            loadSavedCategories();
+        }
+
+        function resetForm() {
+            document.getElementById("edit-questions-form").reset();
+            clueCounter = 3; // Reset counter to 3
+            // Reinitialize with three question fields
+            document.getElementById("clue-fields").innerHTML = `
+                <div class="clue-field">
+                    <label for="clue-0-question">Question:</label>
+                    <input type="text" class="clue-question" name="clue-0-question" required />
+                    <label for="clue-0-answer">Answer:</label>
+                    <input type="text" class="clue-answer" name="clue-0-answer" required />
+                </div>
+                <div class="clue-field">
+                    <label for="clue-1-question">Question:</label>
+                    <input type="text" class="clue-question" name="clue-1-question" required />
+                    <label for="clue-1-answer">Answer:</label>
+                    <input type="text" class="clue-answer" name="clue-1-answer" required />
+                </div>
+                <div class="clue-field">
+                    <label for="clue-2-question">Question:</label>
+                    <input type="text" class="clue-question" name="clue-2-question" required />
+                    <label for="clue-2-answer">Answer:</label>
+                    <input type="text" class="clue-answer" name="clue-2-answer" required />
+                    <button type="button" class="add-remove-button" onclick="addClueField(this)">+</button>
+                </div>
+            `;
+        }
+
+        function loadSavedCategories() {
+            const savedCategories = JSON.parse(localStorage.getItem("jeopardyData")) || [];
+            const savedCategoriesList = document.getElementById("saved-categories");
+            savedCategoriesList.innerHTML = "";
+            savedCategories.forEach((category, index) => {
+                const listItem = document.createElement("li");
+                listItem.textContent = `Category: ${category.categoryTitle}, Number of Clues: ${category.clues.length}`;
+                const editButton = document.createElement("button");
+                editButton.textContent = "Edit";
+                editButton.addEventListener("click", () => editCategory(index));
+                const deleteButton = document.createElement("button");
+                deleteButton.textContent = "Delete";
+                deleteButton.addEventListener("click", () => deleteCategory(index));
+                listItem.appendChild(editButton);
+                listItem.appendChild(deleteButton);
+                savedCategoriesList.appendChild(listItem);
+            });
+        }
+
+        function editCategory(index) {
+            const jeopardyData = JSON.parse(localStorage.getItem("jeopardyData")) || [];
+            const category = jeopardyData[index];
+            document.getElementById("category-title").value = category.categoryTitle;
+            // Loop through clues and set input values
+            category.clues.forEach((clue, i) => {
+                document.querySelector(`input[name="clue-${i}-question"]`).value = clue.question;
+                document.querySelector(`input[name="clue-${i}-answer"]`).value = clue.answer;
+            });
+            document.getElementById("add-button").style.display = "none";
+            document.getElementById("save-button").style.display = "block";
+            document.getElementById("save-button").setAttribute("data-index", index.toString());
+        }
+        
+        function deleteCategory(index) {
+            let jeopardyData = JSON.parse(localStorage.getItem("jeopardyData")) || [];
+            jeopardyData.splice(index, 1);
+            localStorage.setItem("jeopardyData", JSON.stringify(jeopardyData));
+            loadSavedCategories();
+        }
+
+        loadSavedCategories();
+    </script>
+</body>
+</html>

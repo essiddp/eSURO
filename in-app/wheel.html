@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <title>Spin Wheel</title>
+</head>
+<body>
+    <div id="container">
+        <div id="chart"></div>
+        <div id="inputArea">
+            <br>
+            <div id="wheelTitle">WHEEL OF NAMES</div>
+            <br>
+            <br>
+            <textarea id="inputText" placeholder="Enter choices..." rows="5" cols="50"></textarea>
+            <br>
+            <button id="submitBtn">SUBMIT</button>
+            <button id="clrBtn">CLEAR</button>
+            <button onclick="window.location.href = '../index.html'">HOME</button>
+        </div>
+    </div>
+    <!-- Custom popup window -->
+    <div class="popup-overlay" id="popupOverlay"></div>
+    <div class="popup" id="popupWindow">
+        <div class="popup-content">
+            <p id="popupText"></p>
+            <button id="removeBtn">Remove</button>
+            <button id="keepBtn">Keep</button>
+        </div>
+    </div>
+    <script src="../assets/js/d3.js" charset="utf-8"></script>
+    <script src="../assets/js/wheel.js"></script>
+</body>
+</html>

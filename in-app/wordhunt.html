@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Word Hunt</title>
+<link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+<h1>Word Hunt</h1>
+<button onclick="window.location.href = '../index.html'">HOME</button>
+<form id="wordHuntForm">
+    <label for="wordList">Enter words (per line):<br>* all caps para makita agad</label><br>
+    <textarea id="wordList" name="wordList" required></textarea><br><br>
+    <label for="gridSize">Enter grid size:</label>
+    <input type="number" id="gridSize" name="gridSize" min="5" max="20" value="10" required><br><br>
+    <input type="submit" value="Generate Word Hunt">
+</form>
+
+<div id="wordHuntGrid"></div>
+
+<script>
+    document.getElementById("wordHuntForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        const wordList = formData.get("wordList").split('\n').map(word => word.trim()).filter(word => word !== '');
+        const gridSize = formData.get("gridSize");
+        generateWordHunt(wordList, gridSize);
+    });
+
+    function generateWordHunt(words, gridSize) {
+        const wordHunt = new WordHunt(words, gridSize);
+        const gridHtml = wordHunt.generateGridHtml();
+        document.getElementById("wordHuntGrid").innerHTML = gridHtml;
+    }
+
+    class WordHunt {
+        constructor(words, gridSize) {
+            this.gridSize = gridSize;
+            this.words = words;
+            this.grid = this.initializeGrid();
+            this.fillWords();
+            this.fillGrid();
+        }
+
+        initializeGrid() {
+            const grid = [];
+            for (let i = 0; i < this.gridSize; i++) {
+                grid.push([]);
+                for (let j = 0; j < this.gridSize; j++) {
+                    grid[i].push('.');
+                }
+            }
+            return grid;
+        }
+
+        fillWords() {
+            const random = new Random();
+            for (const word of this.words) {
+                let placed = false;
+                while (!placed) {
+                    const direction = random.nextInt(8);
+                    const startX = random.nextInt(this.gridSize);
+                    const startY = random.nextInt(this.gridSize);
+                    if (this.tryPlaceWord(word, startX, startY, direction)) {
+                        placed = true;
+                    }
+                }
+            }
+        }
+
+        tryPlaceWord(word, startX, startY, direction) {
+            let dx = 0, dy = 0;
+            switch (direction) {
+                case 0:
+                    dx = 1;
+                    break;
+                case 1:
+                    dx = 1;
+                    dy = 1;
+                    break;
+                case 2:
+                    dy = 1;
+                    break;
+                case 3:
+                    dx = -1;
+                    dy = 1;
+                    break;
+                case 4:
+                    dx = -1;
+                    break;
+                case 5:
+                    dx = -1;
+                    dy = -1;
+                    break;
+                case 6:
+                    dy = -1;
+                    break;
+                case 7:
+                    dx = 1;
+                    dy = -1;
+                    break;
+            }
+
+            let x = startX;
+            let y = startY;
+
+            for (const c of word) {
+                if (x < 0 || x >= this.gridSize || y < 0 || y >= this.gridSize || (this.grid[x][y] !== '.' && this.grid[x][y] !== c)) {
+                    return false;
+                }
+                x += dx;
+                y += dy;
+            }
+
+            x = startX;
+            y = startY;
+
+            for (const c of word) {
+                this.grid[x][y] = c;
+                x += dx;
+                y += dy;
+            }
+
+            return true;
+        }
+
+        fillGrid() {
+            const random = new Random();
+            for (let i = 0; i < this.gridSize; i++) {
+                for (let j = 0; j < this.gridSize; j++) {
+                    if (this.grid[i][j] === '.') {
+                        this.grid[i][j] = String.fromCharCode('a'.charCodeAt(0) + random.nextInt(26));
+                    }
+                }
+            }
+        }
+
+        generateGridHtml() {
+            let html = "<table border='1'>";
+            for (const row of this.grid) {
+                html += "<tr>";
+                for (const cell of row) {
+                    html += "<td>" + cell + "</td>";
+                }
+                html += "</tr>";
+            }
+            html += "</table>";
+            return html;
+        }
+    }
+
+    // Simple random number generator to mimic Java's Random class
+    class Random {
+        nextInt(max) {
+            return Math.floor(Math.random() * max);
+        }
+    }
+</script>
+</body>
+</html>

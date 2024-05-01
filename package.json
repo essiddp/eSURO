@@ -1,0 +1,18 @@
+{
+  "name": "e-suro",
+  "version": "1.0.0",
+  "description": "an offline application made for the teachers in ifugao",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "package": "npx @electron/packager . --platform=win32 --arch=x64 --out=dist --overwrite"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^30.0.1"
+  },
+  "dependencies": {
+    "pdf-lib": "^1.17.1"
+  }
+}
