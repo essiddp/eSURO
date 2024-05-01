@@ -30,35 +30,34 @@
     <section id="headerInApp">
         <h2>Bingo Card Generator</h2>
     </section>
-    <div id="bingoContainer">
-        <div class="bingoInput">
-            <div id="matrixSize">
-                <br>
-                <h3>
-                    <label for="pageCountInput" style="color: #EEEEEE">Number of Pages:</label>
-                    <div style="margin-bottom: 5px;"></div>
-                </h3>
-                    <input type="number" id="pageCountInput" value="1" min="1" style="width:50px;">
-                
-                <br>
-                <br>
-                <h3 style="color: #EEEEEE">Choose Matrix Size:</h3>
-                <div style="margin-bottom: 5px;"></div>
 
-                <button id="matrixSize3">3x3</button>
-                <button id="matrixSize4">4x4</button>
+    <div class="bingoContainer">
+        <div class="bingoInput">
+            <div id="matrixSize"></div>
+            <br>
+            <h2><label for="pageCountInput">Number of Pages:</label></h2>
+            <input type="number" id="pageCountInput" value="1" min="1" style="width:50px">
+            <br>
+            <br>
+            <h2>Choose Matrix Size:</h2>
+            <div style="display: inline-flex">
+                <button id="matrixSize3" style="margin-right: 10px">3x3</button>
+                <button id="matrixSize4" style="margin-right: 10px">4x4</button>
                 <button id="matrixSize5">5x5</button>
-                <button id="inputMatrixButton" style="display:none">Reset</button>
-                <br>
-                <div id="matrixInputs"></div>
-                <br>
-                <button onclick="window.location.href = '../index.html'">HOME</button>
+            </div>
+            <br>
+            <div id="matrixInputs"></div>
+            <br>
+            <div style="display: inline-flex">
+                <button onclick="window.location.href = '../index.html'" style="margin-right: 10px">HOME</button>
+                <button id="inputMatrixButton" style="margin-right: 10px">Reset</button>
                 <button id="shuffleMatrixButton" style="display:none">Shuffle Matrix</button>
-                <button id="previewPdfButton" style="display:none">Preview PDF</button>
+                <button id="previewPdfButton">Preview PDF</button>
             </div>
         </div>
+
         <div class="bingoPDF">
-            <div class="box" style="height: 100%;">
+            <div class="box" style="height: 100%">
                 <div id="pdfPreview"></div>
             </div>
         </div>
@@ -77,13 +76,11 @@
                 input.type = 'text';
                 input.placeholder = 'Choice '  + count;
                 matrixInputsDiv.appendChild(input);
-                   
+                
                 count++;
             }
-            matrixInputsDiv.appendChild(document.createElement('br')); // Add a line break after each row  
+            matrixInputsDiv.appendChild(document.createElement('br')); // Add a line break after each row      
         }
-        document.getElementById("inputMatrixButton").style.display = "inline-block";
-        document.getElementById("previewPdfButton").style.display = "inline-block";
     }
     
     function shuffleMatrixInputs(matrixInputs) {
