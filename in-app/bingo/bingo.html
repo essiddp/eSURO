@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bingo Card Generator with PDF</title>
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <style>
+        #bingo-card {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1px;
+            padding: 10px;
+            margin: 0 auto; /* Center the grid */
+        }
+      .cell {
+            border: 1px solid black;
+            padding: 5px; /* Adjust cell padding */
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 40px; /* Adjust cell height */
+            width: 40px; /* Adjust cell width */
+            font-size: 12px; /* Adjust initial font size */
+        }
+    </style>
+</head>
+<body>
+    <section id="headerInApp">
+        <h2>Bingo Card Generator</h2>
+    </section>
+
+    <div class="bingoContainer">
+        <div class="bingoInput">
+            <div id="matrixSize"></div>
+            <br>
+            <h2><label for="pageCountInput">Number of Pages:</label></h2>
+            <input type="number" id="pageCountInput" value="1" min="1" style="width:50px">
+            <br>
+            <br>
+            <h2>Choose Matrix Size:</h2>
+            <div style="display: inline-flex">
+                <button id="matrixSize3" style="margin-right: 10px">3x3</button>
+                <button id="matrixSize4" style="margin-right: 10px">4x4</button>
+                <button id="matrixSize5">5x5</button>
+            </div>
+            <br>
+            <div id="matrixInputs"></div>
+            <br>
+            <div style="display: inline-flex">
+                <button onclick="window.location.href = '../../index.html'" style="margin-right: 10px">HOME</button>
+                <button id="inputMatrixButton" style="margin-right: 10px">Reset</button>
+                <button id="shuffleMatrixButton" style="display:none">Shuffle Matrix</button>
+                <button id="previewPdfButton">Preview PDF</button>
+            </div>
+        </div>
+
+        <div class="bingoPDF">
+            <div class="box" style="height: 100%">
+                <div id="pdfPreview"></div>
+            </div>
+        </div>
+    </div>
+<script src="../../node_modules/pdf-lib/dist/pdf-lib.js" defer></script>
+<script>
+    async function createMatrixInputs() {
+        const matrixSize = parseInt(document.getElementById('matrixSize').value);
+        const matrixInputsDiv = document.getElementById('matrixInputs');
+        matrixInputsDiv.innerHTML = '';
+        let count = 1;
+    
+        for (let i = 0; i < matrixSize; i++) {
+            for (let j = 0; j < matrixSize; j++) {
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.placeholder = 'Choice '  + count;
+                matrixInputsDiv.appendChild(input);
+                
+                count++;
+            }
+            matrixInputsDiv.appendChild(document.createElement('br')); // Add a line break after each row      
+        }
+    }
+    
+    function shuffleMatrixInputs(matrixInputs) {
+        const values = [];
+        matrixInputs.forEach(input => {
+            values.push(input.value.trim());
+            input.value = '';
+        });
+        shuffleArray(values);
+        matrixInputs.forEach((input, index) => {
+            input.value = values[index];
+        });
+    }
+    
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
+    
+    async function createPdfMatrix(matrixSize, pageCount) {
+        // Load the PDF file
+        let pdfFileName;
+        switch (matrixSize) {
+            case 5:
+                pdfFileName = "pdf/bingo3.pdf"; // For 5x5, choose page 3
+                break;
+            case 4:
+                pdfFileName = "pdf/bingo2.pdf"; // For 4x4, choose page 2
+                break;
+            case 3:
+            default:
+                pdfFileName = "pdf/bingo1.pdf"; // For 3x3 (or default), choose page 1
+                break;
+        }
+        const pdfBytes = await fetch(pdfFileName).then(res => res.arrayBuffer());
+        const pdfDoc = await PDFLib.PDFDocument.load(pdfBytes);
+        let [tempPDF] = await pdfDoc.copyPages(pdfDoc, [0]);
+
+        for (let pageIdx = 0; pageIdx < pageCount; pageIdx++) {
+            const currentPage = pdfDoc.addPage(tempPDF);
+
+            // Shuffle matrix inputs for each page
+            shuffledInputs = [...document.querySelectorAll('#matrixInputs input')];
+            shuffleArray(shuffledInputs);
+    
+            // Define cell size and margin
+            const margin = 36; // Set margin to 1 inch
+            const matrixWidth = 455; // Adjust the width of the matrix as needed
+            const matrixHeight = 455; // Adjust the height of the matrix as needed
+    
+            // Calculate the cell size based on the matrix size and number of cells
+            const cellSize = Math.min(matrixWidth / matrixSize, matrixHeight / matrixSize);
+    
+            // Draw the matrix on the current page
+            for (let i = 0; i < matrixSize * matrixSize; i++) {
+                let input = shuffledInputs[i];
+                let text = input.value.trim() || '-';
+    
+                const fontSize = 16; // Initial font size
+                const font = await pdfDoc.embedFont(PDFLib.StandardFonts.Helvetica);
+    
+                // Calculate the maximum number of characters that can fit within a cell width
+                const maxChars = Math.floor(cellSize / font.widthOfTextAtSize('X', fontSize));
+    
+                // Split the text into multiple lines if it exceeds the maximum characters per line
+                let lines = [];
+                while (text.length > maxChars) {
+                    lines.unshift(text.slice(-maxChars));
+                    text = text.slice(0, -maxChars);
+                }
+                lines.unshift(text);
+    
+                // Calculate the total height of the trimmed text
+                const totalTextHeight = lines.length * (font.heightAtSize(fontSize) + 2); // Add 2 for line spacing
+    
+                // Calculate the line number that represents the center of the trimmed text
+                const centerLine = Math.floor(lines.length / 2);
+    
+                // Calculate the vertical position of the center line based on the total height
+                const y = currentPage.getHeight() - 235 - Math.floor(i / matrixSize + 1) * cellSize;
+                const yCenter = y + (cellSize - totalTextHeight) / 2 + centerLine * (font.heightAtSize(fontSize) + 2);
+    
+                // Calculate the horizontal position of the text
+                const x = (currentPage.getWidth() - matrixSize * cellSize) / 2 + (i % matrixSize) * cellSize;
+    
+                // Draw each line of text and cell border
+                for (let j = lines.length - 1; j >= 0; j--) {
+                    const line = lines[j];
+                    currentPage.drawText(line, {
+                        x: x + (cellSize - font.widthOfTextAtSize(line, fontSize)) / 2,
+                        y: yCenter - (j - centerLine) * (font.heightAtSize(fontSize) + 2),
+                        size: fontSize,
+                    });
+                }
+            }
+            [tempPDF] = await pdfDoc.copyPages(pdfDoc, [0]);
+        }
+        pdfDoc.removePage(0);
+        return pdfDoc;
+    }
+    
+    document.getElementById('matrixSize3').addEventListener('click', () => {
+        const matrixSizeInput = document.getElementById('matrixSize');
+        if (matrixSizeInput) {
+            matrixSizeInput.value = 3;
+            createMatrixInputs();
+        }
+    });
+    
+    document.getElementById('matrixSize4').addEventListener('click', () => {
+        const matrixSizeInput = document.getElementById('matrixSize');
+        if (matrixSizeInput) {
+            matrixSizeInput.value = 4;
+            createMatrixInputs();
+        }
+    });
+    
+    document.getElementById('matrixSize5').addEventListener('click', () => {
+        const matrixSizeInput = document.getElementById('matrixSize');
+        if (matrixSizeInput) {
+            matrixSizeInput.value = 5;
+            createMatrixInputs();
+        }
+    });
+    
+    document.getElementById('inputMatrixButton').addEventListener('click', () => {
+        createMatrixInputs();
+    });
+    
+    document.getElementById('shuffleMatrixButton').addEventListener('click', () => {
+        const matrixInputs = document.querySelectorAll('#matrixInputs input');
+        shuffleMatrixInputs(matrixInputs);
+    });
+    
+    document.getElementById('previewPdfButton').addEventListener('click', async () => {
+        const matrixSizeInput = document.getElementById('matrixSize');
+        if (matrixSizeInput) {
+            const matrixSize = parseInt(matrixSizeInput.value);
+            const pageCount = parseInt(document.getElementById('pageCountInput').value);
+            const pdfDoc = await createPdfMatrix(matrixSize, pageCount);
+            const pdfBytes = await pdfDoc.save();
+            const pdfBlob = new Blob([pdfBytes], { type: 'application/pdf' });
+            const pdfUrl = URL.createObjectURL(pdfBlob);
+            const pdfPreview = document.getElementById('pdfPreview');
+            if (pdfPreview) {
+                pdfPreview.innerHTML = `<embed src="${pdfUrl}" type="application/pdf" class="embed-pdf" />`;
+            }
+        }
+    });
+    
+</script>
+</body>
+</html>
