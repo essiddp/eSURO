@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Word Hunt</title>
+<link rel="stylesheet" href="../../assets/css/main.css">
+</head>
+<body>
+    <section id="headerInApp">
+        <h2>WORD HUNT</h2>
+    </section>
+
+
+    <div class="wordHuntContainer">
+        <div class="wordHuntInput">
+            <form id="wordHuntForm">
+                <br>
+                <label for="wordList"><h2>Enter words:</h2></label>
+                <textarea id="wordList" name="wordList" required></textarea><br>
+                <label for="gridSize"><h2>Enter grid size:</h2></label>
+                <input type="number" id="gridSize" name="gridSize" min="5" max="20" value="10" required><br><br>
+                <input type="submit" value="Preview PDF">
+            </form>
+            <br>
+            <button onclick="window.location.href = '../../index.html'">HOME</button> 
+        </div>
+
+        <div class="wordHuntPDF">
+            <div id="pdfPreview"></div>
+        </div>
+    </div>
+    <script src="../../node_modules/pdf-lib/dist/pdf-lib.js" defer></script>
+<script>
+    document.getElementById("wordHuntForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        const wordList = formData.get("wordList").split('\n').map(word => word.trim()).filter(word => word !== '');
+        const gridSize = formData.get("gridSize");
+        generateWordHuntPDF(wordList, gridSize);
+    });
+
+    async function generateWordHuntPDF(words, gridSize) {
+        const pdfDoc = await createPdfWordHunt(words, gridSize);
+        const pdfBytes = await pdfDoc.save();
+        const pdfBlob = new Blob([pdfBytes], { type: 'application/pdf' });
+        const pdfUrl = URL.createObjectURL(pdfBlob);
+        const pdfPreview = document.getElementById("pdfPreview");
+        if (pdfPreview) {
+            // Clear previous preview
+            pdfPreview.innerHTML = '';
+            pdfPreview.innerHTML = `<embed src="${pdfUrl}" type="application/pdf" class="embed-pdf" />`;
+        }
+    }
+
+    async function createPdfWordHunt(words, gridSize) {
+        const { PDFDocument, rgb } = PDFLib;
+        const pdfBytes = await fetch("wordhunt.pdf").then(res => res.arrayBuffer());
+        const pdfDoc = await PDFLib.PDFDocument.load(pdfBytes);
+        let page = pdfDoc.getPage(0);
+    
+        const font = await pdfDoc.embedFont(PDFLib.StandardFonts.Helvetica);
+        
+        const fontSize = 12;
+        const matrixSize = gridSize; // Adjust the size of the matrix as needed
+    
+        // Calculate the cell size based on the matrix size and number of cells
+        const cellSize = 450 / matrixSize; // Assuming the PDF page height is 600
+    
+        // Create WordHunt grid
+        const wordHunt = new WordHunt(words, gridSize);
+        wordHunt.fillGrid();
+    
+        for (let i = 0; i < gridSize; i++) {
+            for (let j = 0; j < gridSize; j++) {
+                const word = wordHunt.grid[i][j] || ''; // Fill remaining cells with empty string
+                const x = j * cellSize + 80;
+                const y = 545 - (i + 1) * cellSize;
+    
+                // Draw word in the center of the cell
+                page.drawText(word, {
+                    x: x + (cellSize - font.widthOfTextAtSize(word, fontSize)) / 2,
+                    y: y + (cellSize + fontSize) / 2,
+                    size: fontSize,
+                    font: font,
+                    color: rgb(0, 0, 0),
+                });
+            }
+        }
+    
+        return pdfDoc;
+    }
+        
+
+    class WordHunt {
+        constructor(words, gridSize) {
+            this.gridSize = gridSize;
+            this.words = words;
+            this.grid = this.initializeGrid();
+            this.fillWords();
+        }
+
+        initializeGrid() {
+            const grid = [];
+            for (let i = 0; i < this.gridSize; i++) {
+                grid.push([]);
+                for (let j = 0; j < this.gridSize; j++) {
+                    grid[i].push('.');
+                }
+            }
+            return grid;
+        }
+
+        fillWords() {
+            const random = new Random();
+            for (const word of this.words) {
+                let placed = false;
+                while (!placed) {
+                    const direction = random.nextInt(8);
+                    const startX = random.nextInt(this.gridSize);
+                    const startY = random.nextInt(this.gridSize);
+                    if (this.tryPlaceWord(word, startX, startY, direction)) {
+                        placed = true;
+                    }
+                }
+            }
+        }
+
+        tryPlaceWord(word, startX, startY, direction) {
+            let dx = 0, dy = 0;
+            switch (direction) {
+                case 0:
+                    dx = 1;
+                    break;
+                case 1:
+                    dx = 1;
+                    dy = 1;
+                    break;
+                case 2:
+                    dy = 1;
+                    break;
+                case 3:
+                    dx = -1;
+                    dy = 1;
+                    break;
+                case 4:
+                    dx = -1;
+                    break;
+                case 5:
+                    dx = -1;
+                    dy = -1;
+                    break;
+                case 6:
+                    dy = -1;
+                    break;
+                case 7:
+                    dx = 1;
+                    dy = -1;
+                    break;
+            }
+
+            let x = startX;
+            let y = startY;
+
+            for (const c of word) {
+                if (x < 0 || x >= this.gridSize || y < 0 || y >= this.gridSize || (this.grid[x][y] !== '.' && this.grid[x][y] !== c)) {
+                    return false;
+                }
+                x += dx;
+                y += dy;
+            }
+
+            x = startX;
+            y = startY;
+
+            for (const c of word) {
+                this.grid[x][y] = c;
+                x += dx;
+                y += dy;
+            }
+
+            return true;
+        }
+
+        fillGrid() {
+            const random = new Random();
+            for (let i = 0; i < this.gridSize; i++) {
+                for (let j = 0; j < this.gridSize; j++) {
+                    if (this.grid[i][j] === '.') {
+                        this.grid[i][j] = String.fromCharCode('A'.charCodeAt(0) + random.nextInt(26));
+                    }
+                }
+            }
+        }
+    }
+
+    // Simple random number generator to mimic Java's Random class
+    class Random {
+        nextInt(max) {
+            return Math.floor(Math.random() * max);
+        }
+    }
+</script>
+</body>
+</html>
