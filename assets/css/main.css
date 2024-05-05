@@ -3007,6 +3007,7 @@ input, select, textarea {
 		width: 40%;
 		height: 100%;
 		padding: 20px;
+		background-color: var(--dark-gray);
 		box-sizing: border-box;
 	}
 	
