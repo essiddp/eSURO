@@ -3188,8 +3188,11 @@ input, select, textarea {
 		}
 	
 		.card-model .clue-text {
-		margin-bottom: 1em;
+			margin-bottom: 1em;
+			max-width: 100%; 
+			overflow-wrap: break-word;
 		}
+		
 	
 		.result,
 		.card-modal.showing-result form {
@@ -3239,11 +3242,11 @@ input, select, textarea {
 		color: var(--red);
 		}
 		.result_correct-answer-text {
-		font-weight:bold;
-		margin-top: 80px;
-		font-size: 2em;
-		display:block;
-		margin-left: 0.1em;
+			font-weight: bold;
+			margin-top: 5%; 
+			font-size: 2.5vw; 
+			display: block;
+			margin-left: 1vw; 
 		}
 
 	/* scroll */
