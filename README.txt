@@ -25,6 +25,6 @@ kapag gusto mo i-try gawing app, type mo 'to sa terminal:
     2. npx electron-forge import
     3. npm run make
 
-after niyan, may folder na mabubuo. "make" yung name tapos andon na rin si eSURO as an app. yay! :D
+after niyan, may folder na mabubuo. "out" yung name tapos andon na rin si eSURO as an app dun sa folders don. yay! :D
 
 ------------------------------------------------------------------------------------------------------------------------------
