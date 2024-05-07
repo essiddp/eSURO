@@ -16,8 +16,10 @@
     </div>
     
     <div>
-      <input type = "number" id = "numInput" min = "1" max = "25" value = "1" required>
-      <button id = "inputButton">Generate Triangle</button>
+      <form id="triangleForm">
+        <input type="number" id="numInput" name="numInput" min="1" max="25" required title="Please enter a number between 1 and 25">
+        <input type="submit" id="inputButton" value="Generate Triangle">
+      </form>      
     </div>
     
     <div id = "triangle" class = "center"> 

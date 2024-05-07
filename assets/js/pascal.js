@@ -1,5 +1,6 @@
 const button = document.getElementById('inputButton');
 const triangleContent = document.getElementById('triangle');
+const form = document.getElementById('triangleForm');
 
 let numCache = [];
 
@@ -55,11 +56,19 @@ function getExpansion(n)
   return terms.join(" + ");
 }
 
-function changeTriangle()
-{
-  finalResult = solveTriangle(document.getElementById("numInput").value);
-  expResult = getExpansion(document.getElementById("numInput").value);
-  triangleContent.innerHTML = '<p>' + finalResult + '<br><br>' + "(x + y)<sup>n-1</sup> " + "Expansion:<br>" +expResult +'</p>';
-}
+form.addEventListener('submit', function(event) {
+  event.preventDefault(); // Prevent default form submission behavior
 
-button.addEventListener('click', changeTriangle);
+  const numInput = document.getElementById('numInput').value;
+  const num = parseInt(numInput);
+
+  if (isNaN(num) || num < 1 || num > 25) {
+    // Invalid input: Display error message
+    triangleContent.innerHTML = '<p>Please enter a valid number between 1 and 25.</p>';
+  } else {
+    // Valid input: Generate and display results
+    const finalResult = solveTriangle(num);
+    const expResult = getExpansion(num);
+    triangleContent.innerHTML = '<p>' + finalResult + '<br><br>' + "(x + y)<sup>n-1</sup> " + "Expansion:<br>" + expResult + '</p>';
+  }
+});
