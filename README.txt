@@ -19,3 +19,12 @@ kapag ayaw gumana ng preview pdf
 kung ayaw pa rin gumana, check mo kung yung folder mismo naka open sa compiler mo !! :>
 
 ------------------------------------------------------------------------------------------------------------------------------
+
+kapag gusto mo i-try gawing app, type mo 'to sa terminal:
+    1. npm install --save-dev @electron-forge/cli
+    2. npx electron-forge import
+    3. npm run make
+
+after niyan, may folder na mabubuo. "make" yung name tapos andon na rin si eSURO as an app. yay! :D
+
+------------------------------------------------------------------------------------------------------------------------------
