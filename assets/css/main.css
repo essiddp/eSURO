@@ -3149,7 +3149,7 @@ input, select, textarea {
 		.board .column button {
 		height: 100%;
 		color: inherit;
-		font-size: 2em;
+		font-size: 2vw;
 		border: 0;
 		background: none;
 		display: block;
@@ -3191,6 +3191,7 @@ input, select, textarea {
 			margin-bottom: 1em;
 			max-width: 100%; 
 			overflow-wrap: break-word;
+			text-align: justify;
 		}
 		
 	
@@ -3231,10 +3232,15 @@ input, select, textarea {
 		}
 	
 		.result_success, .result_fail {
-		font-size: 2em;
-		margin-top: 80px;
-		font-weight:bold;
+			font-weight: bold;
+			margin-top: 5%; 
+			font-size: 1vw; 
+			display: block;
+			margin-left: 1vw; 
+			max-width: 90%; /* Adjust for wrapping*/
+			word-wrap: break-word;
 		}
+		
 		.result_success {
 		color: var(--green);
 		}
@@ -3247,6 +3253,8 @@ input, select, textarea {
 			font-size: 2.5vw; 
 			display: block;
 			margin-left: 1vw; 
+			max-width: 90%; /* adjust for wrapping*/
+			word-wrap: break-word;
 		}
 
 	/* scroll */
