@@ -64,24 +64,29 @@
     container.on("click", spin);
 
     function spin() {
-
         if (data.length === 0) {
             return; // Exit the function if there are no inputs
         }
+
         // Store the input text content before disabling
         var inputText = document.getElementById("inputText").value;
         
         container.on("click", null);
+    
         var ps = 360 / data.length,
             rng = Math.floor((Math.random() * 1440) + 360);
+    
+        // Calculate the new rotation angle based on current state
+        oldrotation = rotation;
         rotation = (Math.round(rng / ps) * ps);
         picked = Math.round(data.length - (rotation % 360) / ps);
         picked = picked >= data.length ? (picked % data.length) : picked;
         rotation += 1170 - Math.round(ps / 2);
     
         // Calculate the duration dynamically based on data length
-        var duration = 5000 ; // Adjust this factor as needed
+        var duration = 5000; // Adjust this factor as needed
         
+        // Animate the rotation from oldrotation to new rotation
         vis.transition()
             .duration(duration)
             .attrTween("transform", rotTween)
@@ -91,9 +96,14 @@
                 
                 oldpick = picked;
                 showPopup(data[picked]);
+                
+                // Update oldrotation to current rotation after spin completes
+                oldrotation = rotation;
+                
+                // Re-enable click event after spin completes
+                container.on("click", spin);
             });
     }
-    
   
     svg.append("g")
             .attr("transform", "translate(" + (w + padding.left + padding.right) + "," + ((h/2)+padding.top) + ")")
@@ -112,7 +122,7 @@
             .attr("y", 15)
             .attr("text-anchor", "middle")
             .text("SPIN")
-            .style({"font-weight":"bold", "font-size":"30px", "font-color":"white"});
+            .style({"font-weight":"bold", "font-size":"30px", "font-color":"white", "cursor":"pointer"});
         
         
 
