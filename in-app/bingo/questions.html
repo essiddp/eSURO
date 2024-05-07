@@ -54,6 +54,7 @@
             const { PDFDocument, rgb } = PDFLib;
             const pdfDoc = await PDFDocument.create();
             const page = pdfDoc.addPage()
+            pdfDoc.setTitle("Bingo Questions");
         
             const font = await pdfDoc.embedFont(PDFLib.StandardFonts.Helvetica);
             const fontSize = 12;
