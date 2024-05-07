@@ -112,7 +112,7 @@
             .attr("y", 15)
             .attr("text-anchor", "middle")
             .text("SPIN")
-            .style({"font-weight":"bold", "font-size":"30px", "font-color":"white"});
+            .style({"font-weight":"bold", "font-size":"35px", "font-color":"white"});
         
         
 

@@ -3001,13 +3001,14 @@ input, select, textarea {
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		background-color: var(--dark-gray);
 	}
 
 	#inputArea {
 		width: 40%;
 		height: 100%;
 		padding: 20px;
-		background-color: var(--dark-gray);
+		background-color: var(--black);
 		box-sizing: border-box;
 	}
 	
