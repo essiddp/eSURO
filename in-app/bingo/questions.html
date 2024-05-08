@@ -7,16 +7,76 @@
     <link rel="stylesheet" href="../../assets/css/main.css">
     <title>Bingo Questions</title>
 </head>
-<body class="inAppBody" style="background-color: #222831;">
-    <div class="box" style="background-color:#111419; border-radius:15px">
-    <h1>Questions</h1>
- 
-</div>
+<body>
+    <section id="headerInApp">
+        <h2>Bingo Questions</h2>
+    </section>
+    <div class="bingoQContainer">
+        <div class="bingoQInput">
+            <form id="bingoQForm">
+                <br>
+                <label for="wordList"><h2>Enter Questions:</h2></label>
+                <textarea id="wordList" name="wordList" required></textarea><br>
+                <input type="submit" value="Preview PDF">
+            </form>
+            <br>
+            <button onclick="window.location.href = 'indexBingo.html'">Back</button> 
+        </div>
 
-    <button class="AppButton" onclick="window.location.href = 'indexBingo.html'">BACK</button>
+        <div class="bingoQPDF">
+            <div id="pdfPreview"></div>
+        </div>
+    </div>
 
+    <script src="../../node_modules/pdf-lib/dist/pdf-lib.js" defer></script>
     <script>
-     
+        document.getElementById("bingoQForm").addEventListener("submit", async function(event) { // Fixed form ID here
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const wordList = formData.get("wordList").split('\n').map(word => word.trim()).filter(word => word !== '');
+            await generateWordHuntPDF(wordList);
+        });
+        
+        async function generateWordHuntPDF(words) {
+            const pdfDoc = await createPdfBingoQuestions(words);
+            const pdfBytes = await pdfDoc.save();
+            const pdfBlob = new Blob([pdfBytes], { type: 'application/pdf' });
+            const pdfUrl = URL.createObjectURL(pdfBlob);
+            const pdfPreview = document.getElementById("pdfPreview");
+            if (pdfPreview) {
+                // Clear previous preview
+                pdfPreview.innerHTML = '';
+                pdfPreview.innerHTML = `<embed src="${pdfUrl}" type="application/pdf" class="embed-pdf" />`;
+            }
+        }
+
+        async function createPdfBingoQuestions(words) {
+            const { PDFDocument, rgb } = PDFLib;
+            const pdfDoc = await PDFDocument.create();
+            const page = pdfDoc.addPage()
+            pdfDoc.setTitle("Bingo Questions");
+        
+            const font = await pdfDoc.embedFont(PDFLib.StandardFonts.Helvetica);
+            const fontSize = 12;
+
+            let y = page.getHeight() - 50; // Starting y position
+            let lineNumber = 1;
+
+            for (let word of words) {
+                const line = `${lineNumber}. ${word}`;
+                page.drawText(line, {
+                    x: 50,
+                    y,
+                    size: fontSize,
+                    font: font,
+                    color: rgb(0, 0, 0),
+                });
+                y -= 20; // Move to next line
+                lineNumber++; // Increment line number
+            }
+
+            return pdfDoc;
+        }
     </script>
 </body>
 </html>
