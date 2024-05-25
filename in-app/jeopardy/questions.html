@@ -23,18 +23,35 @@
                 <input type="text" class="clue-question" name="clue-0-question" required />
                 <label for="clue-0-answer">Answer:</label>
                 <input type="text" class="clue-answer" name="clue-0-answer" required />
+                <br>
+                <label for="clue-2-decoy">Decoys:</label>
+                <input type="text" class="clue-decoy1" name="clue-0-decoy1" required />
+                <input type="text" class="clue-decoy2" name="clue-0-decoy2" required />
+                <input type="text" class="clue-decoy3" name="clue-0-decoy3" required />
             </div>
             <div class="clue-field">
                 <label for="clue-1-question">Question:</label>
                 <input type="text" class="clue-question" name="clue-1-question" required />
                 <label for="clue-1-answer">Answer:</label>
                 <input type="text" class="clue-answer" name="clue-1-answer" required />
+                <br>
+                <label for="clue-2-decoy">Decoys:</label>
+                <input type="text" class="clue-decoy1" name="clue-1-decoy1" required />
+                <input type="text" class="clue-decoy2" name="clue-1-decoy2" required />
+                <input type="text" class="clue-decoy3" name="clue-1-decoy3" required />
             </div>
             <div class="clue-field">
                 <label for="clue-2-question">Question:</label>
                 <input type="text" class="clue-question" name="clue-2-question" required />
                 <label for="clue-2-answer">Answer:</label>
                 <input type="text" class="clue-answer" name="clue-2-answer" required />
+                <br>
+                <label for="clue-2-decoy">Decoys:</label>
+                <input type="text" class="clue-decoy1" name="clue-2-decoy1" required />
+                <input type="text" class="clue-decoy2" name="clue-2-decoy2" required />
+                <input type="text" class="clue-decoy3" name="clue-2-decoy3" required />
+
+
                 <button type="button" class="add-remove-button" onclick="addClueField(this)">+</button>
             </div>
         </div>
@@ -63,6 +80,11 @@
                 <input type="text" class="clue-question" name="clue-${clueCounter}-question" required />
                 <label for="clue-${clueCounter}-answer">Answer:</label>
                 <input type="text" class="clue-answer" name="clue-${clueCounter}-answer" required />
+                <br>
+                <label for="clue-${clueCounter}-decoy">Decoys:</label>
+                <input type="text" class="clue-decoy1" name="clue-${clueCounter}-decoy1" required />
+                <input type="text" class="clue-decoy2" name="clue-${clueCounter}-decoy2" required />
+                <input type="text" class="clue-decoy3" name="clue-${clueCounter}-decoy3" required />
                 <button type="button" class="add-remove-button" onclick="removeClueField(this)">–</button>
             `;
             parentDiv.appendChild(newClueField);
@@ -113,8 +135,14 @@
             for (let i = 0; i < clueCounter; i++) {
                 const question = formData.get(`clue-${i}-question`);
                 const answer = formData.get(`clue-${i}-answer`);
-                if (question && answer) {
-                    clues.push({ question, answer });
+                const decoy1 = formData.get(`clue-${i}-decoy1`);
+                const decoy2 = formData.get(`clue-${i}-decoy2`);
+                const decoy3 = formData.get(`clue-${i}-decoy3`);
+                if (question && answer && decoy1) {
+                    clues.push({ question, answer, decoy1, decoy2, decoy3 });
+                }
+                else if (question && answer) {
+                    clues.push({ question, answer});
                 }
             }
             if (categoryTitle && clues.length > 0) {
@@ -143,25 +171,41 @@
             clueCounter = 3; // Reset counter to 3
             // Reinitialize with three question fields
             document.getElementById("clue-fields").innerHTML = `
-                <div class="clue-field">
-                    <label for="clue-0-question">Question:</label>
-                    <input type="text" class="clue-question" name="clue-0-question" required />
-                    <label for="clue-0-answer">Answer:</label>
-                    <input type="text" class="clue-answer" name="clue-0-answer" required />
-                </div>
-                <div class="clue-field">
-                    <label for="clue-1-question">Question:</label>
-                    <input type="text" class="clue-question" name="clue-1-question" required />
-                    <label for="clue-1-answer">Answer:</label>
-                    <input type="text" class="clue-answer" name="clue-1-answer" required />
-                </div>
-                <div class="clue-field">
-                    <label for="clue-2-question">Question:</label>
-                    <input type="text" class="clue-question" name="clue-2-question" required />
-                    <label for="clue-2-answer">Answer:</label>
-                    <input type="text" class="clue-answer" name="clue-2-answer" required />
-                    <button type="button" class="add-remove-button" onclick="addClueField(this)">+</button>
-                </div>
+            <div class="clue-field">
+                <label for="clue-0-question">Question:</label>
+                <input type="text" class="clue-question" name="clue-0-question" required />
+                <label for="clue-0-answer">Answer:</label>
+                <input type="text" class="clue-answer" name="clue-0-answer" required />
+                <br>
+                <label for="clue-2-decoy">Decoys:</label>
+                <input type="text" class="clue-decoy1" name="clue-0-decoy1" required />
+                <input type="text" class="clue-decoy2" name="clue-0-decoy2" required />
+                <input type="text" class="clue-decoy3" name="clue-0-decoy3" required />
+            </div>
+            <div class="clue-field">
+                <label for="clue-1-question">Question:</label>
+                <input type="text" class="clue-question" name="clue-1-question" required />
+                <label for="clue-1-answer">Answer:</label>
+                <input type="text" class="clue-answer" name="clue-1-answer" required />
+                <br>
+                <label for="clue-2-decoy">Decoys:</label>
+                <input type="text" class="clue-decoy1" name="clue-1-decoy1" required />
+                <input type="text" class="clue-decoy2" name="clue-1-decoy2" required />
+                <input type="text" class="clue-decoy3" name="clue-1-decoy3" required />
+            </div>
+            <div class="clue-field">
+                <label for="clue-2-question">Question:</label>
+                <input type="text" class="clue-question" name="clue-2-question" required />
+                <label for="clue-2-answer">Answer:</label>
+                <input type="text" class="clue-answer" name="clue-2-answer" required />
+                <br>
+                <label for="clue-2-decoy">Decoys:</label>
+                <input type="text" class="clue-decoy1" name="clue-2-decoy1" required />
+                <input type="text" class="clue-decoy2" name="clue-2-decoy2" required />
+                <input type="text" class="clue-decoy3" name="clue-2-decoy3" required />
+
+                <button type="button" class="add-remove-button" onclick="addClueField(this)">+</button>
+            </div>
             `;
         }
 
@@ -192,6 +236,9 @@
             category.clues.forEach((clue, i) => {
                 document.querySelector(`input[name="clue-${i}-question"]`).value = clue.question;
                 document.querySelector(`input[name="clue-${i}-answer"]`).value = clue.answer;
+                document.querySelector(`input[name="clue-${i}-decoy1"]`).value = clue.decoy1;
+                document.querySelector(`input[name="clue-${i}-decoy2"]`).value = clue.decoy2;
+                document.querySelector(`input[name="clue-${i}-decoy3"]`).value = clue.decoy3;
             });
             document.getElementById("add-button").style.display = "none";
             document.getElementById("save-button").style.display = "block";
