@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeopardy</title>
+    <link rel="stylesheet" href="../../assets/css/main.css">
+</head>
+<body>
+    <div class="splash-screen">
+        <div class="vertical-align">
+            <h1 style="font-size:40pt; color: #32A0E0ff">JEOPARDY!</h1>
+            <br>
+            <br>
+            <button class="mulcho">MULTIPLE CHOICE</button>
+            <br>
+            <br>
+            <button class="identification">IDENTIFICATION</button>
+            <br>
+            <br>
+            <button onclick="window.location.href = 'indexJeopardy.html'">BACK</button>
+        </div>
+    </div>
+
+    <script>
+        document.querySelector(".mulcho").addEventListener("click", () => {
+            window.location.href = "game/mulcho_jeopardy.html";
+        });
+
+        document.querySelector(".identification").addEventListener("click", () => {
+            window.location.href = "game/jeopardy.html";
+        });
+    </script>
+</body>
+</html>
