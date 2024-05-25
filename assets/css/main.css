@@ -1,6 +1,3 @@
-@import url("fontawesome-all.min.css");
-@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,900,300italic");
-
 /*
 	Dopetrope by HTML5 UP
 	html5up.net | @ajlkn
@@ -24,6 +21,17 @@ section, summary, time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;}
+
+	/* Fonts */
+	@font-face {
+		font-family: 'Montserrat';
+		src: url('Montserrat/Montserrat-VariableFont_wght.ttf') format('truetype');
+	}
+
+	@font-face {
+		font-family: 'Montserrat Bold';
+		src: url('Montserrat/static/Montserrat-ExtraBold.ttf') format('truetype');
+	}
 
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
@@ -83,7 +91,7 @@ input, select, textarea {
 	}
 
 	body {
-		background: #111419;
+		background: var(--blue);
 	}
 
 		body.is-preload *, body.is-preload *:before, body.is-preload *:after {
@@ -98,16 +106,15 @@ input, select, textarea {
 		}
 
 	body, input, textarea, select {
-		font-family: 'Source Sans Pro';
-		font-weight: 300;
-		color: var(--pale-blue);
+		font-family: 'Montserrat';
+		color: var(--cream);
 		font-size: 14pt;
 		line-height: 1.75em;
 	}
 
 	strong, b {
 		color: var(--black);
-		font-weight: 400;
+		font-family: 'Montserrat Bold';
 	}
 
 	i, em {
@@ -133,12 +140,12 @@ input, select, textarea {
 	}
 
 	h1, h2, h3, h4, h5, h6 {
-		color: var(--pale-blue);
-		font-weight: 700;
+		color: var(--gold);
+		font-family: 'Montserrat Bold';
 	}
 
 	h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
-		color: inherit;
+		color: var(--gold);
 		text-decoration: none;
 	}
 
@@ -1448,8 +1455,8 @@ input, select, textarea {
 /* input */
 
 	input {
-		background-color: var(--light-gray);
-		color: var(--white);
+		background-color: var(--cream);
+		color: var(--black);
 	}
 
 	input[type=text]{
@@ -1468,7 +1475,7 @@ input, select, textarea {
 	form label {
 		display: absolute;
 		color: var(--pale-blue);
-		font-weight: 400;
+		font-family: 'Montserrat Bold';
 		margin: 0 0 0.5em 0;
 	}
 
@@ -1484,8 +1491,8 @@ input, select, textarea {
 		border-radius: 5px;
 		margin-top: 10px;
 		margin-bottom: 10px;
-		background: #31363F;
-		color: var(--white);
+		background: var(--cream);
+		color: var(--black);
 		width: 30%;
 	}
 
@@ -1535,7 +1542,7 @@ input, select, textarea {
 		table th {
 			text-align: left;
 			padding: 0.5em 1em 0.5em 1em;
-			font-weight: 700;
+			font-family: 'Montserrat Bold';
 			margin: 0 0 1em 0;
 		}
 
@@ -1567,7 +1574,7 @@ input, select, textarea {
 		header.major {
 			position: relative;
 			text-align: center;
-			border-top: solid 1px #ccc;
+			border-top: solid 1px var(--gold);
 			top: 1em;
 			margin: 0 0 3em 0;
 		}
@@ -1631,9 +1638,9 @@ input, select, textarea {
 		cursor: pointer;
 		border: 0;
 		border-radius: 5px;
-		background: var(--pale-blue);
+		background: var(--gold);
 		color: #252122 !important;
-		font-weight: 700;
+		font-family: 'Montserrat Bold';
 		outline: 0;
 		font-size: 1.1em;
 		padding: 0.65em 1.5em 0.65em 1.5em;
@@ -1649,7 +1656,7 @@ input, select, textarea {
 		input[type="reset"]:hover,
 		button:hover,
 		.button:hover {
-			background: var(--pale-blue-hover);
+			background: var(--gold-hover);
 		}
 
 		input[type="button"]:active,
@@ -1657,7 +1664,7 @@ input, select, textarea {
 		input[type="reset"]:active,
 		button:active,
 		.button:active {
-			background: var(--pale-blue);
+			background: var(--gold);
 		}
 
 		input[type="button"].alt,
@@ -1665,7 +1672,7 @@ input, select, textarea {
 		input[type="reset"].alt,
 		button.alt,
 		.button.alt {
-			background: var(--pale-blue);
+			background: var(--gold);
 		}
 
 			input[type="button"].alt:hover,
@@ -1673,7 +1680,7 @@ input, select, textarea {
 			input[type="reset"].alt:hover,
 			button.alt:hover,
 			.button.alt:hover {
-				background: var(--pale-blue-hover);
+				background: var(--gold-hover);
 			}
 
 			input[type="button"].alt:active,
@@ -1681,7 +1688,7 @@ input, select, textarea {
 			input[type="reset"].alt:active,
 			button.alt:active,
 			.button.alt:active {
-				background: var(--pale-blue);
+				background: var(--gold);
 			}
 
 		input[type="button"].icon:before,
@@ -1905,174 +1912,6 @@ input, select, textarea {
 				padding-top: 0;
 			}
 
-/* Social */
-
-	ul.social {
-		list-style: none;
-		padding-left: 0;
-		overflow: hidden;
-		cursor: default;
-		margin: 0 0 3.25em 0;
-	}
-
-		ul.social li {
-			display: inline-block;
-			padding-left: 0;
-			margin-left: 0.75em;
-		}
-
-			ul.social li:first-child {
-				margin-left: 0;
-			}
-
-			ul.social li a {
-				display: inline-block;
-				width: 3em;
-				height: 3em;
-				text-align: center;
-				border-radius: 5px;
-				background: #888;
-				-moz-transition: background-color .25s ease-in-out;
-				-webkit-transition: background-color .25s ease-in-out;
-				-ms-transition: background-color .25s ease-in-out;
-				transition: background-color .25s ease-in-out;
-			}
-
-				ul.social li a:before {
-					color: #fff;
-					font-size: 2em;
-					line-height: 1.5em;
-				}
-
-				ul.social li a.fa-facebook {
-					background: #3c5a98;
-				}
-
-					ul.social li a.fa-facebook:hover {
-						background: #4c6aa8;
-					}
-
-				ul.social li a.fa-twitter {
-					background: #2daae4;
-				}
-
-					ul.social li a.fa-twitter:hover {
-						background: #3dbaf4;
-					}
-
-				ul.social li a.fa-dribbble {
-					background: #c4376b;
-				}
-
-					ul.social li a.fa-dribbble:hover {
-						background: #d4477b;
-					}
-
-				ul.social li a.fa-linkedin {
-					background: #006599;
-				}
-
-					ul.social li a.fa-linkedin:hover {
-						background: #1075a9;
-					}
-
-				ul.social li a.fa-tumblr {
-					background: #2b4661;
-				}
-
-					ul.social li a.fa-tumblr:hover {
-						background: #3b5671;
-					}
-
-				ul.social li a.fa-google-plus {
-					background: #da2713;
-				}
-
-					ul.social li a.fa-google-plus:hover {
-						background: #ea3723;
-					}
-
-/* Icons */
-
-	.icon {
-		text-decoration: none;
-		position: relative;
-		text-decoration: none;
-	}
-
-		.icon:before {
-			-moz-osx-font-smoothing: grayscale;
-			-webkit-font-smoothing: antialiased;
-			display: inline-block;
-			font-style: normal;
-			font-variant: normal;
-			text-rendering: auto;
-			line-height: 1;
-			text-transform: none !important;
-			font-family: 'Font Awesome 5 Free';
-			font-weight: 400;
-		}
-
-		.icon.solid:before {
-			font-weight: 900;
-		}
-
-		.icon.brands:before {
-			font-family: 'Font Awesome 5 Brands';
-		}
-
-		.icon:before {
-			line-height: inherit;
-		}
-
-		.icon > .label {
-			display: none;
-		}
-
-		.icon.featured {
-			position: relative;
-			display: inline-block;
-			background-color: var(--pale-blue);
-			width: 9em;
-			padding: 1.75em 0 0.75em 0;
-			border-top-left-radius: 5px;
-			border-top-right-radius: 5px;
-			margin: 0 0 4.5em 0;
-			cursor: default;
-		}
-
-			.icon.featured:before {
-				font-size: 4.5em;
-				line-height: 1em;
-				color: #fff;
-			}
-
-			.icon.featured:after {
-				content: '';
-				position: absolute;
-				bottom: -1.95em;
-				left: 0;
-				border-top: solid 2em var(--pale-blue);
-				border-left: solid 4.5em transparent;
-				border-right: solid 4.5em transparent;
-			}
-
-			.icon.featured.alt {
-				background-color: #252122;
-			}
-
-				.icon.featured.alt:after {
-					border-top-color: #252122;
-				}
-
-			.icon.featured.alt2 {
-				background-color: #827a7c;
-			}
-
-				.icon.featured.alt2:after {
-					border-top-color: #827a7c;
-				}
-
 /* Page Wrapper */
 
 	#page-wrapper > section {
@@ -2083,16 +1922,16 @@ input, select, textarea {
 
 	#header {
 		position: relative;
-		background:  var(--accent-blue);
+		background:  var(--cream);
 		border-bottom: solid 1px #ccc;
 		padding: 5em 0 4em 0;
 		text-align: center;
 	}
 
 		#header h1 {
-			color: #252122;
-			font-weight: 900;
-			font-size: 2.5em;
+			color: var(--gold);
+			font-family: 'Montserrat Bold';
+			font-size: 3.5em;
 			letter-spacing: -0.035em;
 			line-height: 1;
 			justify-content: flex;
@@ -2101,10 +1940,9 @@ input, select, textarea {
 		#headerInApp h2 {
 			text-align: center;
 			position: relative;
-			background:  var(--accent-blue);	
+			background:  var(--gold);	
 			padding: 1.5em 0 1.5em 0;
-			color: #252122;
-			font-weight: 900;
+			color: var(--black);
 			font-size: 2.5em;
 			letter-spacing: -0.035em;
 
@@ -2113,6 +1951,7 @@ input, select, textarea {
 /* Nav */
 
 	#nav {
+		
 		margin: 2.5em 0 0 0;
 	}
 
@@ -2122,7 +1961,6 @@ input, select, textarea {
 
 			#nav > ul > li {
 				display: inline-block;
-				font-style: italic;
 				margin: 0 0.35em 0 0.35em;
 			}
 
@@ -2131,8 +1969,8 @@ input, select, textarea {
 				}
 
 				#nav > ul > li > a {
-					border-radius: 5px;
-					color: #5d5d5d;
+					border-radius: 30px;
+					color: var(--black);
 					text-decoration: none;
 					padding: 0.6em 1.2em 0.6em 1.2em;
 					-moz-transition: background-color .25s ease-in-out;
@@ -2143,62 +1981,14 @@ input, select, textarea {
 				}
 
 				#nav > ul > li:hover > a, #nav > ul > li.active > a {
-					background: var(--accent-blue-hover);
+					background: var(--gold-hover);
 				}
 
 				#nav > ul > li.current > a {
-					background:#14141c;
-					color: #fff !important;
-					font-weight: 700;
+					background:var(--gold);
+					color: var(--black) !important;
+					font-family: 'Montserrat Bold';
 				}
-
-	.dropotron {
-		border-radius: 5px;
-		background-color: #252122;
-		background-color: rgba(34, 30, 31, 0.98);
-		padding: 1.25em 1.5em 1.25em 1.5em;
-		font-style: italic;
-		min-width: 13em;
-		box-shadow: 0px 8px 15px 0px rgba(0, 0, 0, 0.5);
-		text-align: left;
-		margin-top: -1.25em;
-		margin-left: -1px;
-		list-style: none;
-	}
-
-		.dropotron a, .dropotron span {
-			color: #aaa;
-			text-decoration: none;
-			-moz-transition: color .25s ease-in-out;
-			-webkit-transition: color .25s ease-in-out;
-			-ms-transition: color .25s ease-in-out;
-			transition: color .25s ease-in-out;
-		}
-
-		.dropotron li {
-			padding: 0.25em 0 0.25em 0;
-		}
-
-			.dropotron li:hover > a, .dropotron li:hover > span {
-				color: #fff;
-			}
-
-		.dropotron.level-0 {
-			margin-top: 2em;
-		}
-
-			.dropotron.level-0:before {
-				content: '';
-				display: block;
-				position: absolute;
-				left: 50%;
-				margin-left: -10px;
-				top: -9px;
-				border-left: solid 10px transparent;
-				border-right: solid 10px transparent;
-				border-bottom: solid 10px #252122;
-				border-bottom-color: rgba(34, 30, 31, 0.98);
-			}
 
 /* Banner */
 
@@ -2222,7 +2012,7 @@ input, select, textarea {
 
 			#banner header h2 {
 				color: #fff;
-				font-weight: 700;
+				font-family: 'Montserrat Bold';
 				font-size: 2.5em;
 				margin: 0 0 0.65em 0;
 			}
@@ -2296,7 +2086,7 @@ input, select, textarea {
 
 	#main {
 		position: relative;
-		background:  #111419 url("images/bg02.png");
+		background: var(--blue) ;
 		padding: 4em 0 4em 0;
 	}
 
@@ -2313,8 +2103,8 @@ input, select, textarea {
 		}
 
 		#main .major h2 {
-			background:  #111419 url("images/bg02.png");
-			color: var(--white);
+			background:  var(--blue);
+			color: var(--gold);
 		}
 
 /* Footer */
@@ -2616,8 +2406,7 @@ input, select, textarea {
 						text-rendering: auto;
 						line-height: 1;
 						text-transform: none !important;
-						font-family: 'Font Awesome 5 Free';
-						font-weight: 900;
+						font-family: 'Montserrat Bold';
 					}
 
 					#titleBar .toggle:before {
@@ -2641,6 +2430,7 @@ input, select, textarea {
 					}
 
 			#navPanel {
+				background-color: var(--cream);
 				-moz-backface-visibility: hidden;
 				-webkit-backface-visibility: hidden;
 				-ms-backface-visibility: hidden;
@@ -2661,14 +2451,14 @@ input, select, textarea {
 				top: 0;
 				width: 275px;
 				z-index: 10002;
-				color: #858484;
+				color: var(--black);
 				background-image: url("images/bg02.png");
 				box-shadow: inset -3px 0px 5px 0px rgba(0, 0, 0, 0.35);
 			}
 
 				#navPanel .link {
 					display: block;
-					color: #888;
+					color: var(--black);
 					text-decoration: none;
 					height: 44px;
 					line-height: 44px;
@@ -2707,7 +2497,7 @@ input, select, textarea {
 				}
 
 				#navPanel .depth-0 {
-					color: #fff;
+					color: var(--black);
 				}
 
 			body.navPanel-visible #page-wrapper {
@@ -2881,7 +2671,7 @@ input, select, textarea {
 
 				#header h1 {
 					color: #252122;
-					font-weight: 900;
+					font-family: 'Montserrat Bold';
 					font-size: 1.75em;
 					letter-spacing: -0.035em;
 				}
@@ -2944,15 +2734,7 @@ input, select, textarea {
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		height: 100vh;
-	}
-
-	#wheelTitle{
-		color: var(--accent-blue);
-		font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-		font-size: 40px;
-		font-weight: bold;
-		line-height: 40px;
+		width: 100vw;
 	}
 
 	.popup {
@@ -2987,7 +2769,7 @@ input, select, textarea {
 	}
 
 	.popuptxt {
-		font-weight: 600;
+		font-family: 'Montserrat Bold';
 		font-size: 20pt;
 		margin: 10px;
 		margin-bottom: 20px;
@@ -3001,14 +2783,15 @@ input, select, textarea {
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		background-color: var(--dark-gray);
+		background-color: var(--blue);
+		margin-top: 40px;
 	}
 
 	#inputArea {
 		width: 40%;
 		height: 100%;
 		padding: 20px;
-		background-color: var(--black);
+		background-color: var(--blue);
 		box-sizing: border-box;
 	}
 	
@@ -3018,7 +2801,8 @@ input, select, textarea {
 		padding: 10px;
 		margin-bottom: 10px;
 		resize: none;
-		background-color: #31363F;
+		color: var(--black);
+		background-color: var(--cream);
 		border: 1px solid #ccc;
 		border-radius: 4px;
 		font-size: 14pt;
@@ -3057,8 +2841,11 @@ input, select, textarea {
 	
 
 	:root {
-
-		
+		--cream: #FFF8F2;
+		--gold: #FFBB00;
+		--gold-hover: #ffe397;
+		--blue: #04234D;
+		--black: #000000;
 		--white: #EEEEEE;
 		--accent-blue: #38B6FF;
 		--accent-blue-hover: #3596ce;
@@ -3066,7 +2853,6 @@ input, select, textarea {
 		--pale-blue-hover: #558c8f;
 		--light-gray: #31363F;
 		--dark-gray: #222831;
-		--black: #111419;
 		--yellow: #f7ff11;
 		--green: #1ccf00;
 		--red: #620000;
@@ -3096,7 +2882,7 @@ input, select, textarea {
 		.score-count {
 		color: var(--accent-blue);
 		font-size: 2em;
-		font-weight:bold;
+		font-family: 'Montserrat Bold';
 		margin-left: 0.2em;
 		}
 	
@@ -3123,7 +2909,7 @@ input, select, textarea {
 		}
 		.board .column header {
 		text-transform: uppercase;
-		font-weight: 800;
+		font-family: 'Montserrat Bold';
 		font-size: xx-large;
 		color: #14141c;
 		background: var(--accent-blue);
@@ -3155,7 +2941,7 @@ input, select, textarea {
 		display: block;
 		width: 100%;
 		cursor: pointer;
-		font-weight:bold;
+		font-family: 'Montserrat Bold';
 		}
 		.board .column button.used {
 		visibility: hidden;
@@ -3232,7 +3018,7 @@ input, select, textarea {
 		}
 	
 		.result_success, .result_fail {
-			font-weight: bold;
+			font-family: 'Montserrat Bold';
 			margin-top: 5%; 
 			font-size: 1vw; 
 			display: block;
@@ -3248,7 +3034,7 @@ input, select, textarea {
 		color: var(--red);
 		}
 		.result_correct-answer-text {
-			font-weight: bold;
+			font-family: 'Montserrat Bold';
 			margin-top: 5%; 
 			font-size: 2.5vw; 
 			display: block;
@@ -3265,13 +3051,13 @@ input, select, textarea {
 	
 	/* Handle */
 	::-webkit-scrollbar-thumb {
-		background: #33343c; /* Color of the scrollbar handle */
+		background: var(--cream); /* Color of the scrollbar handle */
 		border-radius: 5px; /* Rounded corners */
 	}
 	
 	/* Handle on hover */
 	::-webkit-scrollbar-thumb:hover {
-		background: #2b2b31; /* Color of the scrollbar handle on hover */
+		background: var(--cream); /* Color of the scrollbar handle on hover */
 	}
   
 	/* wordhunt */
@@ -3296,7 +3082,7 @@ input, select, textarea {
 	}
 
 	.wordHuntPDF {
-		background-color: var(--dark-gray);
+		background-color: var(--blue);
 		width: 65%;
 		height: 100%;
 	}
@@ -3324,11 +3110,10 @@ input, select, textarea {
 
 	.bingoInput input{
 		width: 17%;
-
 	}
 
 	.bingoPDF {
-		background-color: var(--dark-gray);
+		background-color: var(--cream);
 		width: 100%;
 		height: 100%;
 	}
@@ -3356,7 +3141,19 @@ input, select, textarea {
 	}
 
 	.bingoQPDF {
-		background-color: var(--dark-gray);
+		background-color: var(--white);
 		width: 65%;
 		height: 100%;
+	}
+
+	/* Triangle */
+
+	#triangle{
+		font-size: larger;
+		font-family: 'Montserrat Bold';
+	}
+
+	.indexTitle {
+		font-size:40pt;
+		color: var(--white);
 	}

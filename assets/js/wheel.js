@@ -9,9 +9,12 @@
         picked = 100000,
         oldpick = -1,
         color = d3.scale.ordinal().range([
-            '#68989b',
-            '#76ABAE',
-            '#578b8f',
+            '#D4070F',
+            '#F18009',
+            '#FFDA13',
+            '#01D93F',
+            '#0069C9',
+            '#59009F',
         ]);
         
     var originalData = [];

@@ -10,24 +10,21 @@
   </head>
 
   <body>
-    <button onclick="window.location.href = '../index.html'">HOME</button>
-    <div class = "opener">
-        <h1>Pascal's Triangle Solver</h1>
-    </div>
-    
+    <section id="headerInApp">
+      <h2>PASCAL'S TRIANGLE SOLVER</h2>
+    </section>
+        
     <div>
       <form id="triangleForm">
         <input type="number" id="numInput" name="numInput" min="1" max="25" required title="Please enter a number between 1 and 25">
         <input type="submit" id="inputButton" value="Generate Triangle">
       </form>      
     </div>
-    
+    <button onclick="window.location.href = '../index.html'">HOME</button>
     <div id = "triangle" class = "center"> 
-      <p>
         Please enter a number to be solved
-      </p>
     </div>
-
+    
     <script src="../assets/js/pascal.js"></script>
   </body> 
 </html>

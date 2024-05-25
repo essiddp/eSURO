@@ -37,9 +37,7 @@
         </div>
 
         <div class="bingoPDF">
-            <div class="box" style="height: 100%">
                 <div id="pdfPreview"></div>
-            </div>
         </div>
     </div>
 <script src="../../node_modules/pdf-lib/dist/pdf-lib.js" defer></script>
@@ -202,7 +200,7 @@
         if (matrixSizeInput) {
             const matrixSize = parseInt(matrixSizeInput.value);
             const pageCount = parseInt(document.getElementById('pageCountInput').value);
-            const pdfDoc = await createPdfMatrix(matrixSize, pageCount);
+           const pdfDoc = await createPdfMatrix(matrixSize, pageCount);
             const pdfBytes = await pdfDoc.save();
             const pdfBlob = new Blob([pdfBytes], { type: 'application/pdf' });
             const pdfUrl = URL.createObjectURL(pdfBlob);
