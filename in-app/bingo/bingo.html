@@ -83,16 +83,20 @@
     async function createPdfMatrix(matrixSize, pageCount) {
         // Load the PDF file
         let pdfFileName;
+        let fontSize;
         switch (matrixSize) {
             case 5:
                 pdfFileName = "pdf/bingo3.pdf"; // For 5x5, choose page 3
+                fontSize = 16; // Initial font size
                 break;
             case 4:
                 pdfFileName = "pdf/bingo2.pdf"; // For 4x4, choose page 2
+                fontSize = 18; // Initial font size
                 break;
             case 3:
             default:
                 pdfFileName = "pdf/bingo1.pdf"; // For 3x3 (or default), choose page 1
+                fontSize = 20; // Initial font size
                 break;
         }
         const pdfBytes = await fetch(pdfFileName).then(res => res.arrayBuffer());
@@ -119,7 +123,7 @@
                 let input = shuffledInputs[i];
                 let text = input.value.trim() || '-';
     
-                const fontSize = 16; // Initial font size
+               
                 const font = await pdfDoc.embedFont(PDFLib.StandardFonts.Helvetica);
     
                 // Calculate the maximum number of characters that can fit within a cell width
