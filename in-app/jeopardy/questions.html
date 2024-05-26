@@ -7,15 +7,17 @@
     <link rel="stylesheet" href="../../assets/css/main.css">
     <title>Edit Questions and Answers</title>
 </head>
-<body class="inAppBody" style="background-color: #222831;">
-    <div class="box" style="background-color:#111419; border-radius:15px">
-    <h1>Edit Questions and Answers</h1>
+<body>
+    <section id="headerInApp">
+        <h2>EDIT QUESTIONS AND ANSWERS</h2>
+    </section>
     <form id="edit-questions-form">
+        <div style="justify-content: center;">
+            <label for="category-title">Category Title</label>
+            <input type="text" id="category-title" name="category-title" required />
+        </div>
         
-        <input type="text" id="category-title" name="category-title" required />
         <br>
-        <label for="category-title">Category Title</label>
-        <br />
         <div id="clue-fields">
             <!-- Initialize with three question fields -->
             <div class="clue-field">
@@ -24,7 +26,7 @@
                 <label for="clue-0-answer">Answer:</label>
                 <input type="text" class="clue-answer" name="clue-0-answer" required />
                 <br>
-                <label for="clue-2-decoy">Decoys:</label>
+                <label for="clue-0-decoy">Decoys:</label>
                 <input type="text" class="clue-decoy1" name="clue-0-decoy1" required />
                 <input type="text" class="clue-decoy2" name="clue-0-decoy2" required />
                 <input type="text" class="clue-decoy3" name="clue-0-decoy3" required />
@@ -35,7 +37,7 @@
                 <label for="clue-1-answer">Answer:</label>
                 <input type="text" class="clue-answer" name="clue-1-answer" required />
                 <br>
-                <label for="clue-2-decoy">Decoys:</label>
+                <label for="clue-1-decoy">Decoys:</label>
                 <input type="text" class="clue-decoy1" name="clue-1-decoy1" required />
                 <input type="text" class="clue-decoy2" name="clue-1-decoy2" required />
                 <input type="text" class="clue-decoy3" name="clue-1-decoy3" required />
@@ -59,7 +61,6 @@
         <button type="button" id="add-button">Submit</button>
         <button type="button" id="save-button" style="display: none;">Save Changes</button>
     </form>
-</div>
 
     <!-- Display saved categories/questions -->
     <h2>Saved Categories/Questions:</h2>
@@ -177,7 +178,7 @@
                 <label for="clue-0-answer">Answer:</label>
                 <input type="text" class="clue-answer" name="clue-0-answer" required />
                 <br>
-                <label for="clue-2-decoy">Decoys:</label>
+                <label for="clue-0-decoy">Decoys:</label>
                 <input type="text" class="clue-decoy1" name="clue-0-decoy1" required />
                 <input type="text" class="clue-decoy2" name="clue-0-decoy2" required />
                 <input type="text" class="clue-decoy3" name="clue-0-decoy3" required />
@@ -188,7 +189,7 @@
                 <label for="clue-1-answer">Answer:</label>
                 <input type="text" class="clue-answer" name="clue-1-answer" required />
                 <br>
-                <label for="clue-2-decoy">Decoys:</label>
+                <label for="clue-1-decoy">Decoys:</label>
                 <input type="text" class="clue-decoy1" name="clue-1-decoy1" required />
                 <input type="text" class="clue-decoy2" name="clue-1-decoy2" required />
                 <input type="text" class="clue-decoy3" name="clue-1-decoy3" required />

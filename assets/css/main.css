@@ -2838,7 +2838,6 @@ input, select, textarea {
 		justify-content: center;
 		align-items: center;
 	}
-	
 
 	:root {
 		--cream: #FFF8F2;
@@ -2866,56 +2865,57 @@ input, select, textarea {
 		box-sizing: border-box;
 		}
 	
-	
 		.top-header {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin: 25px;
 		}
-	
+		
 		.score {
-		display: flex;
-		align-items: center;
+			font-family: "Montserrat";
+			font-size: 25px;
+			display: flex;
+			align-items: center;
 		}
 		
 		.score-count {
-		color: var(--accent-blue);
-		font-size: 2em;
-		font-family: 'Montserrat Bold';
-		margin-left: 0.2em;
+			color: var(--gold);
+			font-size: 2em;
+			font-family: 'Montserrat Bold';
+			margin-left: 0.2em;
+			margin-right: 10px;
 		}
 	
 		.column ul {
-		list-style-type: none;
-		margin: 0;
-		padding: 0;
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
 		}
 	
 		/* whole body of the category and quesh */
 		.board {
-		display: flex;
-		justify-content: space-around;
-		margin-left: 1em;
-		margin-right: 1em;
+			display: flex;
+			justify-content: space-around;
+			margin-left: 1em; /* inadd ko lang */
+			margin-right: 1em;  /* inadd ko lang */
 		}
 	
 		/* category and its quesh */
 		.board .column {
-		flex: 1;
-		margin: 1em;
-	
-		/* category */
+			flex: 1;
+			margin: 1em;
 		}
+		/* category */
 		.board .column header {
 		text-transform: uppercase;
 		font-family: 'Montserrat Bold';
 		font-size: xx-large;
-		color: #14141c;
-		background: var(--accent-blue);
+		color: black;
+		background: var(--gold);
 		text-align: center;
-		margin-bottom: 1em;
-		height: 2em;
+		margin-bottom: .5em;
+		height: 2.5em;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -2924,8 +2924,7 @@ input, select, textarea {
 	
 		/* question box */
 		.board .column li {
-		background: var(--accent-blue);
-		color: var(--white);
+		background: var(--cream);
 		height: 4em;
 		margin-bottom: 0.5em;
 		border-radius: 10px;
@@ -2943,106 +2942,114 @@ input, select, textarea {
 		cursor: pointer;
 		font-family: 'Montserrat Bold';
 		}
+
 		.board .column button.used {
-		visibility: hidden;
-		}
-		
+			visibility: hidden;
+		 }
+
 		/* bg kapag napindot question */
 		.card-modal {
-		opacity: 0;
-		pointer-events:none;
-		transition: opacity 0.4s;
-		left: 0;
-		right: 0;
-		top: 0;
-		bottom: 0;
-		background: var(--black);
-		
-		position: fixed;
-		font-size: 2vw;
-		text-align: center;
-		display: flex;
-		align-items: center;
-		justify-content: center;
+			opacity: 0;
+			pointer-events:none;
+			transition: opacity 0.4s;
+			left: 0;
+			right: 0;
+			top: 0;
+			bottom: 0;
+			background: var(--black);
+			position: fixed;
+			font-size: 2vw;
+			text-align: center;
+			display: flex;
+			align-items: center;
+			justify-content: center;
 		}
+
 		.card-modal.visible {
-		opacity: 1;
-		pointer-events:initial;
+			opacity: 1;
+			pointer-events:initial;
 		}
 		.card-modal.showing-result .result {
-		display:block;
+			display:block;
 		}
 	
 		.card-model .clue-text {
-			margin-bottom: 1em;
 			max-width: 100%; 
 			overflow-wrap: break-word;
-			text-align: justify;
+			text-align: center;
 		}
 		
-	
 		.result,
 		.card-modal.showing-result form {
-		display:none;
+			display:none;
 		}
 	
 		.card-modal form {
-		display: flex;
-		}
-		.card-modal form input[type="text"] {
-		margin: 10px;
-		display: block;
-		flex-grow: 1;
-		height: 3em;
-		line-height: 3em;
-		border: 0;
-		text-align: center;
-		border-top-left-radius: 0.4em;
-		border-bottom-left-radius: 0.4em;
-		}
-		.card-modal form button[type="submit"] {
-		padding-left: 2em;
-		padding-right: 2em;
-		height: 3em;
-		cursor: pointer;
-		font-family: inherit;
-		background: var(--accent-blue);
-		border: 0;
-		font-size: inherit;
-		border-top-right-radius: 0.4em;
-		border-bottom-right-radius: 0.4em;
-		}
-		.card-modal-inner {
-		width: 60%;
-		text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-		}
-	
-		.result_success, .result_fail {
-			font-family: 'Montserrat Bold';
-			margin-top: 5%; 
-			font-size: 1vw; 
-			display: block;
-			margin-left: 1vw; 
-			max-width: 90%; /* Adjust for wrapping*/
-			word-wrap: break-word;
+			display: flex;
 		}
 		
-		.result_success {
-		color: var(--green);
-		}
-		.result_fail {
-		color: var(--red);
-		}
-		.result_correct-answer-text {
-			font-family: 'Montserrat Bold';
-			margin-top: 5%; 
-			font-size: 2.5vw; 
+		.card-modal form input[type="text"] {
 			display: block;
-			margin-left: 1vw; 
-			max-width: 90%; /* adjust for wrapping*/
-			word-wrap: break-word;
+			flex-grow: 1;
+			height: 4em;
+			line-height: 3em;
+			border: 0;
+			text-align: center;
+			border-top-left-radius: 0.6em;
+			border-bottom-left-radius: 0.6em;
 		}
 
+		.card-modal form button[type="submit"] {
+			padding-left: 2em;
+			padding-right: em;
+			cursor: pointer;
+			font-family: inherit;
+			background: var(--accent-blue);
+			border: 0;
+			font-size: inherit;
+			border-top-right-radius: 0.6em;
+			border-bottom-right-radius: 0.6em;
+		}
+
+		.card-modal-inner {
+			width: 60%;
+			text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+		}
+		.result {
+			display: none;
+			margin-top: 1em; /* Add space between the form and the result text */
+		}
+		
+		.result_success,
+		.result_fail {
+			font-family: 'Montserrat Bold';
+			font-size: 60px; 
+			display: block;
+			max-width: 100%; /* Adjust for wrapping */
+			word-wrap: break-word;
+			margin: 1em 0; /* Add vertical space */
+		}
+		
+		.result_correct-answer-text {
+			font-family: 'Montserrat Bold';
+			font-size: 60px; 
+			display: block;
+			max-width: 100%; /* Adjust for wrapping */
+			word-wrap: break-word;
+			margin-top: 1em; /* Add space between the result and the correct answer */
+		}
+		
+		
+		.result_success {
+			color: var(--green);
+			font-size: 70px;
+		}
+
+		.result_fail {
+			color: var(--red);
+			font-size: 70px;
+		}
+		
 	/* scroll */
 
 	::-webkit-scrollbar {

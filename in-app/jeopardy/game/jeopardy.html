@@ -39,7 +39,10 @@
                 </div>
             </div>
         </div>
-        <button class="AppButton" onclick="window.location.href = '../indexJeopardy.html'">BACK</button>
+        <div style="text-align: center;  ">
+            <button class="AppButton" onclick="window.location.href = '../indexJeopardy.html'">BACK</button>
+        </div>
+        
     </div>
 
     <script>
@@ -110,7 +113,10 @@
     
                     // Mark this button as used
                     event.target.classList.add("used");
-    
+                    
+                    // Disable the button
+                    event.target.disabled = true;
+                    
                     // Clear out the input field
                     this.inputElement.value = "";
     
