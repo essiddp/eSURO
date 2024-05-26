@@ -1462,7 +1462,7 @@ input, select, textarea {
 	input[type=text]{
 		margin-top: 10px;
 		margin-right: 10px;
-		color: var(--white);
+		color: var(--black);
 		border: 0;
 		border-radius: 5px;
 	}
