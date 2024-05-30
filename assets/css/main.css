@@ -2841,6 +2841,7 @@ input, select, textarea {
 	
 	:root {
 		--cream: #FFF8F2;
+		--cream-hover: #c3b9b3;
 		--gold: #FFBB00;
 		--gold-hover: #ffe397;
 		--blue: #04234D;
@@ -3053,14 +3054,15 @@ input, select, textarea {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr); /* Create 4 equal columns */
 		grid-template-rows: repeat(2, auto); /* Create 4 rows */
-		gap: 20px; /* Add space between the buttons */
+		gap: 30px; /* Add space between the buttons */
 		margin: 20px;
 		justify-content: center; /* Center the grid horizontally */
-		width: 900px;
+		width: 1000px;
 	}	
 	
 	/* Individual choice button */
 	.choices button {
+		background-color: var(--cream);
 		padding: 10px 20px;      /* Add some padding for better button appearance */
 		margin: 5px 0;           /* Add some margin between buttons */
 		cursor: pointer;
@@ -3074,7 +3076,7 @@ input, select, textarea {
 	}
 	
 	.choices button:hover {
-		background: var(--gold-hover);
+		background: var(--cream-hover);
 	}
 	
 		
