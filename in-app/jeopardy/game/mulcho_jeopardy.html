@@ -25,9 +25,8 @@
             <div class="card-modal">
                 <div class="card-modal-inner">
                     <h2 class="clue-text"><!-- clue gets injected here --></h2>
-                    <form autocomplete="off">
-                        <input name="user-answer" type="hidden" value="1"/>
-                        <div id = "choices"></div>
+                    <form>
+                        <div class = "choices"></div>
                     </form>
                     <div class="result">
                         <p class="result_success">CORRECT</p>
@@ -57,14 +56,13 @@
                     this.boardElement = element.querySelector(".board");
                     this.scoreCountElement = element.querySelector(".score-count");
                     this.formElement = element.querySelector("form");
-                    this.inputElement = element.querySelector("input[name=user-answer]");
+                    this.choicesElement = element.querySelector(".choices");
                     this.modalElement = element.querySelector(".card-modal");
                     this.clueTextElement = element.querySelector(".clue-text");
                     this.resultElement = element.querySelector(".result");
                     this.resultTextElement = element.querySelector(".result_correct-answer-text");
                     this.successTextElement = element.querySelector(".result_success");
                     this.failTextElement = element.querySelector(".result_fail");
-                    console.log(this.inputElement.value);
                 }
     
                 initGame() {
@@ -77,11 +75,11 @@
                     this.formElement.addEventListener("submit", event => {
                         this.handleFormSubmit(event);
                     });
-    
+        
                     // Render initial state of score
                     this.updateScore(0);
                 }
-    
+
                 renderCategory(category) {
                     let column = document.createElement("div");
                     column.classList.add("column");
@@ -100,7 +98,7 @@
                     // Add to DOM
                     this.boardElement.appendChild(column);
                 }
-    
+                
                 updateScore(change) {
                     this.score += change;
                     this.scoreCountElement.textContent = this.score;
@@ -113,7 +111,7 @@
                     event.target.classList.add("used");
     
                     // Clear out the input field
-                    this.inputElement.value = "";
+                    this.choicesElement.innerHTML = "";
     
                     // Update current clue
                     this.currentClue = clue;
@@ -127,35 +125,35 @@
     
                     // Show the modal
                     this.modalElement.classList.add("visible");
-                    this.inputElement.focus();
+                    
+                    this.currentClue.choices.forEach(choice => 
+                    {
+                        const button = document.createElement("button");
+                        button.textContent = choice;
+                        button.addEventListener("click", event =>
+                        {
+                            event.preventDefault();
+                            this.handleFormSubmit(new Event("submit"), choice);
+                            console.log(choice);
+                        });
+                        this.choicesElement.appendChild(button);
+                    });
                 }
     
                 // Handle an answer from user
-                handleFormSubmit(event) {
+                handleFormSubmit(event, answer) {
                     event.preventDefault();
     
-                    var isCorrect = this.cleanseAnswer(this.inputElement.value) === this.cleanseAnswer(this.currentClue.answer);
+                    var isCorrect = answer === this.currentClue.answer;
+                    console.log(answer);
+                    console.log(this.currentClue.answer);
                     if (isCorrect) {
                         this.updateScore(this.currentClue.value);
-                        
                     }
     
                     // Show answer
                     this.revealAnswer(isCorrect);
                 }
-    
-                // Standardize an answer string so we can compare and accept variations
-                cleanseAnswer(input = "") {
-                    var friendlyAnswer = input.toLowerCase();
-                    friendlyAnswer = friendlyAnswer.replace("<i>", "");
-                    friendlyAnswer = friendlyAnswer.replace("</i>", "");
-                    friendlyAnswer = friendlyAnswer.replace(/ /g, "");
-                    friendlyAnswer = friendlyAnswer.replace(/"/g, "");
-                    friendlyAnswer = friendlyAnswer.replace(/^a /, "");
-                    friendlyAnswer = friendlyAnswer.replace(/^an /, "");
-                    return friendlyAnswer.trim();
-                }
-    
     
                 revealAnswer(isCorrect) {
                     // Show the individual success/fail case
@@ -189,6 +187,7 @@
                         this.clues[clueId] = {
                             question: clue.question,
                             answer: clue.answer,
+                            choices: [clue.answer, clue.decoy1, clue.decoy2, clue.decoy3],
                             value: (index + 1) * 100
                         };
                     });
@@ -202,7 +201,7 @@
             }
             // Retrieve data from localStorage
             const jeopardyData = JSON.parse(localStorage.getItem("jeopardyData"));
-        
+            
             // Check if data exists
             if (jeopardyData) {
                 // If data exists, display the game board
