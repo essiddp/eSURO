@@ -2838,7 +2838,7 @@ input, select, textarea {
 		justify-content: center;
 		align-items: center;
 	}
-
+	
 	:root {
 		--cream: #FFF8F2;
 		--gold: #FFBB00;
@@ -2859,55 +2859,55 @@ input, select, textarea {
 		--spooky-orange-text: #fffec8;
 		--gap: 0.1em;
 		--text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-		}
+	}
 	
-		* {
+	* {
 		box-sizing: border-box;
-		}
+	}
 	
-		.top-header {
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			margin: 25px;
-		}
-		
-		.score {
-			font-family: "Montserrat";
-			font-size: 25px;
-			display: flex;
-			align-items: center;
-		}
-		
-		.score-count {
-			color: var(--gold);
-			font-size: 2em;
-			font-family: 'Montserrat Bold';
-			margin-left: 0.2em;
-			margin-right: 10px;
-		}
+	.top-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin: 25px;
+	}
 	
-		.column ul {
-			list-style-type: none;
-			margin: 0;
-			padding: 0;
-		}
+	.score {
+		font-family: "Montserrat";
+		font-size: 25px;
+		display: flex;
+		align-items: center;
+	}
 	
-		/* whole body of the category and quesh */
-		.board {
-			display: flex;
-			justify-content: space-around;
-			margin-left: 1em; /* inadd ko lang */
-			margin-right: 1em;  /* inadd ko lang */
-		}
+	.score-count {
+		color: var(--gold);
+		font-size: 2em;
+		font-family: 'Montserrat Bold';
+		margin-left: 0.2em;
+		margin-right: 10px;
+	}
 	
-		/* category and its quesh */
-		.board .column {
-			flex: 1;
-			margin: 1em;
-		}
-		/* category */
-		.board .column header {
+	.column ul {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+	}
+	
+	/* whole body of the category and quesh */
+	.board {
+		display: flex;
+		justify-content: space-around;
+		margin-left: 1em; /* inadd ko lang */
+		margin-right: 1em;  /* inadd ko lang */
+	}
+	
+	/* category and its quesh */
+	.board .column {
+		flex: 1;
+		margin: 1em;
+	}
+	/* category */
+	.board .column header {
 		text-transform: uppercase;
 		font-family: 'Montserrat Bold';
 		font-size: xx-large;
@@ -2920,18 +2920,18 @@ input, select, textarea {
 		align-items: center;
 		justify-content: center;
 		border-radius: 10px;
-		}
+	}
 	
-		/* question box */
-		.board .column li {
+	/* question box */
+	.board .column li {
 		background: var(--cream);
 		height: 4em;
 		margin-bottom: 0.5em;
 		border-radius: 10px;
-		}
+	}
 	
-		/* question */
-		.board .column button {
+	/* question */
+	.board .column button {
 		height: 100%;
 		color: inherit;
 		font-size: 2vw;
@@ -2941,114 +2941,143 @@ input, select, textarea {
 		width: 100%;
 		cursor: pointer;
 		font-family: 'Montserrat Bold';
-		}
-
-		.board .column button.used {
-			visibility: hidden;
-		 }
-
-		/* bg kapag napindot question */
-		.card-modal {
-			opacity: 0;
-			pointer-events:none;
-			transition: opacity 0.4s;
-			left: 0;
-			right: 0;
-			top: 0;
-			bottom: 0;
-			background: var(--black);
-			position: fixed;
-			font-size: 2vw;
-			text-align: center;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-		}
-
-		.card-modal.visible {
-			opacity: 1;
-			pointer-events:initial;
-		}
-		.card-modal.showing-result .result {
-			display:block;
-		}
+	}
 	
-		.card-model .clue-text {
-			max-width: 100%; 
-			overflow-wrap: break-word;
-			text-align: center;
-		}
-		
-		.result,
-		.card-modal.showing-result form {
-			display:none;
-		}
+	.board .column button.used {
+		visibility: hidden;
+	}
 	
-		.card-modal form {
-			display: flex;
-		}
+	/* bg kapag napindot question */
+	.card-modal {
+		opacity: 0;
+		pointer-events:none;
+		transition: opacity 0.4s;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		background: var(--black);
+		position: fixed;
+		font-size: 2vw;
+		text-align: center;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	
+	.card-modal.visible {
+		opacity: 1;
+		pointer-events:initial;
+		background-color: var(--blue);
+	}
+	.card-modal.showing-result .result {
+		display:block;
+	}
+	
+	.card-modal .clue-text {
+		margin-bottom: 30px;
+		max-width: 100%; 
+		overflow-wrap: break-word;
+		text-align: center;
+	}
+	
+	.result,
+	.card-modal.showing-result form {
+		display:none;
+	}
+	
+	.card-modal form {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	
+	.card-modal form input[type="text"] {
+		display: block;
+		margin: 30px;
+		flex-grow: 1;
+		height: 4em;
+		width: 80%;
+		line-height: 3em;
+		border: 0;
+		text-align: center;
+	}
+	
+	.card-modal form button[type="submit"] {
+		cursor: pointer;
+		font-family: "Montserrat Bold";
+		background: var(--gold);
+		border: 0;
+		font-size: inherit;
+	}
+	
+	.card-modal-inner {
+		width: 60%;
+		text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	}
+	.result {
+		display: none;
+		margin-top: 1em; /* Add space between the form and the result text */
+	}
+	
+	.result_success,
+	.result_fail {
+		font-family: 'Montserrat Bold';
+		font-size: 60px; 
+		display: block;
+		max-width: 100%; /* Adjust for wrapping */
+		word-wrap: break-word;
+		margin: 1em 0; /* Add vertical space */
+	}
+	
+	.result_correct-answer-text {
+		font-family: 'Montserrat Bold';
+		font-size: 60px; 
+		display: block;
+		max-width: 100%; /* Adjust for wrapping */
+		word-wrap: break-word;
+		margin-top: 1em; /* Add space between the result and the correct answer */
+	}
+	
+	.result_success {
+		color: var(--green);
+		font-size: 70px;
+	}
+	
+	.result_fail {
+		color: var(--red);
+		font-size: 70px;
+	}
+	
+	.choices {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr); /* Create 4 equal columns */
+		grid-template-rows: repeat(2, auto); /* Create 4 rows */
+		gap: 20px; /* Add space between the buttons */
+		margin: 20px;
+		justify-content: center; /* Center the grid horizontally */
+		width: 900px;
+	}	
+	
+	/* Individual choice button */
+	.choices button {
+		padding: 10px 20px;      /* Add some padding for better button appearance */
+		margin: 5px 0;           /* Add some margin between buttons */
+		cursor: pointer;
+		font-family: 'Montserrat Bold';
+		border: 0;
+		font-size: 1.5vw;
+		border-radius: 2em;
+		color: white;            /* Ensure button text is readable */
+		width: 100%;              /* Set a width to make the buttons consistent */
+		text-align: center;      /* Center the text inside the button */
+	}
+	
+	.choices button:hover {
+		background: var(--gold-hover);
+	}
+	
 		
-		.card-modal form input[type="text"] {
-			display: block;
-			flex-grow: 1;
-			height: 4em;
-			line-height: 3em;
-			border: 0;
-			text-align: center;
-			border-top-left-radius: 0.6em;
-			border-bottom-left-radius: 0.6em;
-		}
-
-		.card-modal form button[type="submit"] {
-			padding-left: 2em;
-			padding-right: em;
-			cursor: pointer;
-			font-family: inherit;
-			background: var(--accent-blue);
-			border: 0;
-			font-size: inherit;
-			border-top-right-radius: 0.6em;
-			border-bottom-right-radius: 0.6em;
-		}
-
-		.card-modal-inner {
-			width: 60%;
-			text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-		}
-		.result {
-			display: none;
-			margin-top: 1em; /* Add space between the form and the result text */
-		}
-		
-		.result_success,
-		.result_fail {
-			font-family: 'Montserrat Bold';
-			font-size: 60px; 
-			display: block;
-			max-width: 100%; /* Adjust for wrapping */
-			word-wrap: break-word;
-			margin: 1em 0; /* Add vertical space */
-		}
-		
-		.result_correct-answer-text {
-			font-family: 'Montserrat Bold';
-			font-size: 60px; 
-			display: block;
-			max-width: 100%; /* Adjust for wrapping */
-			word-wrap: break-word;
-			margin-top: 1em; /* Add space between the result and the correct answer */
-		}
-		
-		
-		.result_success {
-			color: var(--green);
-			font-size: 70px;
-		}
-
-		.result_fail {
-			color: var(--red);
-			font-size: 70px;
-		}
 		
 	/* scroll */
 
