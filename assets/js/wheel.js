@@ -65,6 +65,7 @@
     updateWheel();
 
     container.on("click", spin);
+    
 
     function spin() {
         if (data.length === 0) {
@@ -113,6 +114,14 @@
     function spinSound() {
         const audio = document.getElementById('wheelspin');
         audio.play();
+        const music = document.getElementById('music');
+        music.pause();
+        setTimeout(replayMusic, 11100);
+    }
+    
+    function replayMusic() {
+        const music = document.getElementById('music');
+        music.play();
     }
   
     svg.append("g")
