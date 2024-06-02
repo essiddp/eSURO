@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../assets/css/main.css">
     <title>Bingo Questions</title>
@@ -30,13 +29,13 @@
 
     <script src="../../node_modules/pdf-lib/dist/pdf-lib.js" defer></script>
     <script>
-        document.getElementById("bingoQForm").addEventListener("submit", async function(event) { // Fixed form ID here
+        document.getElementById("bingoQForm").addEventListener("submit", async function(event) {
             event.preventDefault();
             const formData = new FormData(event.target);
             const wordList = formData.get("wordList").split('\n').map(word => word.trim()).filter(word => word !== '');
             await generateWordHuntPDF(wordList);
         });
-        
+
         async function generateWordHuntPDF(words) {
             const pdfDoc = await createPdfBingoQuestions(words);
             const pdfBytes = await pdfDoc.save();
@@ -44,7 +43,6 @@
             const pdfUrl = URL.createObjectURL(pdfBlob);
             const pdfPreview = document.getElementById("pdfPreview");
             if (pdfPreview) {
-                // Clear previous preview
                 pdfPreview.innerHTML = '';
                 pdfPreview.innerHTML = `<embed src="${pdfUrl}" type="application/pdf" class="embed-pdf" />`;
             }
@@ -53,29 +51,56 @@
         async function createPdfBingoQuestions(words) {
             const { PDFDocument, rgb } = PDFLib;
             const pdfDoc = await PDFDocument.create();
-            const page = pdfDoc.addPage()
+            let page = pdfDoc.addPage([600, 800]);
             pdfDoc.setTitle("Bingo Questions");
-        
+
             const font = await pdfDoc.embedFont(PDFLib.StandardFonts.Helvetica);
             const fontSize = 12;
+            const margin = 50;
+            const maxWidth = page.getWidth() - 2 * margin;
 
-            let y = page.getHeight() - 50; // Starting y position
+            let y = page.getHeight() - margin;
             let lineNumber = 1;
 
             for (let word of words) {
-                const line = `${lineNumber}. ${word}`;
-                page.drawText(line, {
-                    x: 50,
-                    y,
-                    size: fontSize,
-                    font: font,
-                    color: rgb(0, 0, 0),
-                });
-                y -= 20; // Move to next line
-                lineNumber++; // Increment line number
+                let text = `${lineNumber}. ${word}`;
+                const lines = wrapText(text, font, fontSize, maxWidth);
+
+                for (let line of lines) {
+                    if (y < margin) {
+                        page = pdfDoc.addPage([600, 800]);
+                        y = page.getHeight() - margin;
+                    }
+                    page.drawText(line, {
+                        x: margin,
+                        y,
+                        size: fontSize,
+                        font: font,
+                        color: rgb(0, 0, 0),
+                    });
+                    y -= fontSize + 2; // Adjust spacing between lines
+                }
+
+                lineNumber++;
             }
 
             return pdfDoc;
+        }
+
+        function wrapText(text, font, fontSize, maxWidth) {
+            const lines = [];
+            let start = 0;
+
+            while (start < text.length) {
+                let end = text.length;
+                while (end > start && font.widthOfTextAtSize(text.slice(start, end), fontSize) > maxWidth) {
+                    end--;
+                }
+                lines.push(text.slice(start, end).trim());
+                start = end;
+            }
+
+            return lines;
         }
     </script>
 </body>
