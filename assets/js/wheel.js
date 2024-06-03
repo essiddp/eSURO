@@ -65,6 +65,7 @@
     updateWheel();
 
     container.on("click", spin);
+    
 
     function spin() {
         if (data.length === 0) {
@@ -84,10 +85,10 @@
         rotation = (Math.round(rng / ps) * ps);
         picked = Math.round(data.length - (rotation % 360) / ps);
         picked = picked >= data.length ? (picked % data.length) : picked;
-        rotation += 1170 - Math.round(ps / 2);
+        rotation += 3000 - Math.round(ps / 2);
     
         // Calculate the duration dynamically based on data length
-        var duration = 5000; // Adjust this factor as needed
+        var duration = 10800; // Adjust this factor as needed
         
         // Animate the rotation from oldrotation to new rotation
         vis.transition()
@@ -106,6 +107,21 @@
                 // Re-enable click event after spin completes
                 container.on("click", spin);
             });
+
+        setTimeout(spinSound, 0);
+    }
+
+    function spinSound() {
+        const audio = document.getElementById('wheelspin');
+        audio.play();
+        const music = document.getElementById('music');
+        music.pause();
+        setTimeout(replayMusic, 11100);
+    }
+    
+    function replayMusic() {
+        const music = document.getElementById('music');
+        music.play();
     }
   
     svg.append("g")
@@ -205,5 +221,3 @@
         // Update the wheel
         updateWheel();
     });
-
-
