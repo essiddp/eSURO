@@ -1,8 +1,32 @@
-/*
-	Dopetrope by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
-*/
+:root {
+	--cream: #FFF8F2;
+	--cream-hover: #c3b9b3;
+	--gold: #FFBB00;
+	--gold-hover: #ffe397;
+	--blue: #04234D;
+	--violet: rgb(31, 0, 59);
+	--black: #000000;
+	--white: #EEEEEE;
+	--accent-blue: #38B6FF;
+	--accent-blue-hover: #3596ce;
+	--pale-blue: #76ABAE;
+	--pale-blue-hover: #558c8f;
+	--light-gray: #31363F;
+	--dark-gray: #222831;
+	--yellow: #f7ff11;
+	--green: #1ccf00;
+	--red: #620000;
+	--spooky-orange: #9d671b;
+	--spooky-orange-text: #fffec8;
+	--gap: 0.1em;
+	--text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+	--xblue: #26355D;
+	--xviolet: #53265C;
+	--xorange: #e24c06;
+	--xyellow: #FACF00;
+	--xred: #e20606;
+}
 
 html, body, div, span, applet, object,
 iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
@@ -20,7 +44,13 @@ section, summary, time, mark, audio, video {
 	border: 0;
 	font-size: 100%;
 	font: inherit;
-	vertical-align: baseline;}
+	vertical-align: baseline;
+}
+
+html, body {
+	max-width: 100%;
+	overflow-x: hidden;
+}
 
 	/* Fonts */
 	@font-face {
@@ -31,6 +61,16 @@ section, summary, time, mark, audio, video {
 	@font-face {
 		font-family: 'Montserrat Bold';
 		src: url('Montserrat/static/Montserrat-ExtraBold.ttf') format('truetype');
+	}
+
+	@font-face {
+		font-family: 'Kid';
+		src: url('Kid.ttf');
+	}
+
+	@font-face {
+		font-family: 'Mansalva';
+		src: url('Mansalva-Regular.ttf');
 	}
 
 article, aside, details, figcaption, figure,
@@ -91,7 +131,7 @@ input, select, textarea {
 	}
 
 	body {
-		background: var(--blue);
+		background: var(--violet);
 	}
 
 		body.is-preload *, body.is-preload *:before, body.is-preload *:after {
@@ -107,7 +147,7 @@ input, select, textarea {
 
 	body, input, textarea, select {
 		font-family: 'Montserrat';
-		color: var(--cream);
+		color: var(--violet);
 		font-size: 14pt;
 		line-height: 1.75em;
 	}
@@ -140,13 +180,14 @@ input, select, textarea {
 	}
 
 	h1, h2, h3, h4, h5, h6 {
-		color: var(--gold);
+		color: var(--xyellow);
 		font-family: 'Montserrat Bold';
 	}
 
 	h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
-		color: var(--gold);
+		color: var(--xyellow);
 		text-decoration: none;
+		z-index: 3;
 	}
 
 	h1 {
@@ -1455,7 +1496,7 @@ input, select, textarea {
 /* input */
 
 	input {
-		background-color: var(--cream);
+		background-color: var(--violet);
 		color: var(--black);
 	}
 
@@ -1491,7 +1532,7 @@ input, select, textarea {
 		border-radius: 5px;
 		margin-top: 10px;
 		margin-bottom: 10px;
-		background: var(--cream);
+		background: var(--violet);
 		color: var(--black);
 		width: 30%;
 	}
@@ -1560,10 +1601,6 @@ input, select, textarea {
 			margin-bottom: 0;
 		}
 
-	header {
-		margin: 0 0 1.5em 0;
-	}
-
 		header > p {
 			display: block;
 			font-style: italic;
@@ -1574,7 +1611,7 @@ input, select, textarea {
 		header.major {
 			position: relative;
 			text-align: center;
-			border-top: solid 1px var(--gold);
+			border-top: solid 1px var(--xyellow);
 			top: 1em;
 			margin: 0 0 3em 0;
 		}
@@ -1638,7 +1675,7 @@ input, select, textarea {
 		cursor: pointer;
 		border: 0;
 		border-radius: 5px;
-		background: var(--gold);
+		background: var(--xyellow);
 		color: #252122 !important;
 		font-family: 'Montserrat Bold';
 		outline: 0;
@@ -1664,7 +1701,7 @@ input, select, textarea {
 		input[type="reset"]:active,
 		button:active,
 		.button:active {
-			background: var(--gold);
+			background: var(--xyellow);
 		}
 
 		input[type="button"].alt,
@@ -1672,7 +1709,7 @@ input, select, textarea {
 		input[type="reset"].alt,
 		button.alt,
 		.button.alt {
-			background: var(--gold);
+			background: var(--xyellow);
 		}
 
 			input[type="button"].alt:hover,
@@ -1688,7 +1725,7 @@ input, select, textarea {
 			input[type="reset"].alt:active,
 			button.alt:active,
 			.button.alt:active {
-				background: var(--gold);
+				background: var(--xyellow);
 			}
 
 		input[type="button"].icon:before,
@@ -1922,36 +1959,42 @@ input, select, textarea {
 
 	#header {
 		position: relative;
-		background:  var(--cream);
-		border-bottom: solid 1px #ccc;
+		background:  var(--xorange);
+		background: radial-gradient(ellipse at top, var(--gold), transparent),
+            radial-gradient(ellipse at bottom, var(--xred), transparent);
+		height: 300px;
+		/* border-bottom: solid 1px #ccc; */
 		padding: 5em 0 4em 0;
 		text-align: center;
 	}
 
 		#header h1 {
-			color: var(--gold);
+			color: var(--xyellow);
 			font-family: 'Montserrat Bold';
 			font-size: 3.5em;
 			letter-spacing: -0.035em;
 			line-height: 1;
 			justify-content: flex;
+			position: relative;
+			z-index: 2;
 		}
 	
-		#headerInApp h2 {
+		/* #headerInApp h2 {
 			text-align: center;
 			position: relative;
-			background:  var(--gold);	
+			background:  var(--xyellow);	
 			padding: 1.5em 0 1.5em 0;
 			color: var(--black);
 			font-size: 2.5em;
 			letter-spacing: -0.035em;
 
-		}
+		} */
 
 /* Nav */
 
 	#nav {
-		
+		z-index: 3;
+		position: relative;
 		margin: 2.5em 0 0 0;
 	}
 
@@ -1970,7 +2013,7 @@ input, select, textarea {
 
 				#nav > ul > li > a {
 					border-radius: 30px;
-					color: var(--black);
+					color: var(--cream);
 					text-decoration: none;
 					padding: 0.6em 1.2em 0.6em 1.2em;
 					-moz-transition: background-color .25s ease-in-out;
@@ -1981,11 +2024,12 @@ input, select, textarea {
 				}
 
 				#nav > ul > li:hover > a, #nav > ul > li.active > a {
+					color: var(--black);
 					background: var(--gold-hover);
 				}
 
 				#nav > ul > li.current > a {
-					background:var(--gold);
+					background:var(--xyellow);
 					color: var(--black) !important;
 					font-family: 'Montserrat Bold';
 				}
@@ -2086,7 +2130,7 @@ input, select, textarea {
 
 	#main {
 		position: relative;
-		background: var(--blue) ;
+		background: linear-gradient(var(--blue), var(--violet));
 		padding: 4em 0 4em 0;
 	}
 
@@ -2104,7 +2148,7 @@ input, select, textarea {
 
 		#main .major h2 {
 			background:  var(--blue);
-			color: var(--gold);
+			color: var(--xyellow);
 		}
 
 /* Footer */
@@ -2300,12 +2344,6 @@ input, select, textarea {
 					margin-top: 0;
 				}
 
-		/* Header */
-
-			#header {
-				padding: 3.5em 0 3em 0;
-			}
-
 		/* Nav */
 
 			#nav {
@@ -2430,7 +2468,7 @@ input, select, textarea {
 					}
 
 			#navPanel {
-				background-color: var(--cream);
+				background-color: var(--violet);
 				-moz-backface-visibility: hidden;
 				-webkit-backface-visibility: hidden;
 				-ms-backface-visibility: hidden;
@@ -2569,9 +2607,9 @@ input, select, textarea {
 				margin-bottom: 20px;
 			}
 
-			header {
+			/* header {
 				margin: 0 0 1em 0;
-			}
+			} */
 
 			footer {
 				margin: 2em 0 0 0;
@@ -2660,20 +2698,6 @@ input, select, textarea {
 				.icon.featured:after {
 					border-left: solid 4em transparent;
 					border-right: solid 4em transparent;
-				}
-
-		/* Header */
-
-			#header {
-				text-align: center;
-				padding: 2em 0;
-			}
-
-				#header h1 {
-					color: #252122;
-					font-family: 'Montserrat Bold';
-					font-size: 1.75em;
-					letter-spacing: -0.035em;
 				}
 
 		/* Intro */
@@ -2802,7 +2826,7 @@ input, select, textarea {
 		margin-bottom: 10px;
 		resize: none;
 		color: var(--black);
-		background-color: var(--cream);
+		background-color: var(--violet);
 		border: 1px solid #ccc;
 		border-radius: 4px;
 		font-size: 14pt;
@@ -2838,29 +2862,7 @@ input, select, textarea {
 		justify-content: center;
 		align-items: center;
 	}
-	
-	:root {
-		--cream: #FFF8F2;
-		--cream-hover: #c3b9b3;
-		--gold: #FFBB00;
-		--gold-hover: #ffe397;
-		--blue: #04234D;
-		--black: #000000;
-		--white: #EEEEEE;
-		--accent-blue: #38B6FF;
-		--accent-blue-hover: #3596ce;
-		--pale-blue: #76ABAE;
-		--pale-blue-hover: #558c8f;
-		--light-gray: #31363F;
-		--dark-gray: #222831;
-		--yellow: #f7ff11;
-		--green: #1ccf00;
-		--red: #620000;
-		--spooky-orange: #ad4e08;
-		--spooky-orange-text: #fffec8;
-		--gap: 0.1em;
-		--text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-	}
+
 	
 	* {
 		box-sizing: border-box;
@@ -2881,7 +2883,7 @@ input, select, textarea {
 	}
 	
 	.score-count {
-		color: var(--gold);
+		color: var(--xyellow);
 		font-size: 2em;
 		font-family: 'Montserrat Bold';
 		margin-left: 0.2em;
@@ -2913,7 +2915,7 @@ input, select, textarea {
 		font-family: 'Montserrat Bold';
 		font-size: xx-large;
 		color: black;
-		background: var(--gold);
+		background: var(--xyellow);
 		text-align: center;
 		margin-bottom: .5em;
 		height: 2.5em;
@@ -2925,7 +2927,7 @@ input, select, textarea {
 	
 	/* question box */
 	.board .column li {
-		background: var(--cream);
+		background: var(--violet);
 		height: 4em;
 		margin-bottom: 0.5em;
 		border-radius: 10px;
@@ -3007,7 +3009,7 @@ input, select, textarea {
 	.card-modal form button[type="submit"] {
 		cursor: pointer;
 		font-family: "Montserrat Bold";
-		background: var(--gold);
+		background: var(--xyellow);
 		border: 0;
 		font-size: inherit;
 	}
@@ -3062,7 +3064,7 @@ input, select, textarea {
 	
 	/* Individual choice button */
 	.choices button {
-		background-color: var(--cream);
+		background-color: var(--violet);
 		padding: 10px 20px;      /* Add some padding for better button appearance */
 		margin: 5px 0;           /* Add some margin between buttons */
 		cursor: pointer;
@@ -3089,13 +3091,13 @@ input, select, textarea {
 	
 	/* Handle */
 	::-webkit-scrollbar-thumb {
-		background: var(--cream); /* Color of the scrollbar handle */
+		background: var(--violet); /* Color of the scrollbar handle */
 		border-radius: 5px; /* Rounded corners */
 	}
 	
 	/* Handle on hover */
 	::-webkit-scrollbar-thumb:hover {
-		background: var(--cream); /* Color of the scrollbar handle on hover */
+		background: var(--violet); /* Color of the scrollbar handle on hover */
 	}
   
 	/* wordhunt */
@@ -3151,7 +3153,7 @@ input, select, textarea {
 	}
 
 	.bingoPDF {
-		background-color: var(--cream);
+		background-color: var(--violet);
 		width: 100%;
 		height: 100%;
 	}
@@ -3195,3 +3197,162 @@ input, select, textarea {
 		font-size:40pt;
 		color: var(--white);
 	}
+
+/* KEYFRAMES */
+
+@-webkit-keyframes animateCloud {
+	0% {
+		opacity: 0;
+			margin-left: -1000px;
+	}
+	10% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 1;
+			margin-left: 100%;
+	}
+}
+
+@-moz-keyframes animateCloud {
+	0% {
+		opacity: 0;
+			margin-left: -1000px;
+	}
+	10% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 1;
+			margin-left: 100%;
+	}
+}
+
+@keyframes animateCloud {
+	0% {
+		opacity: 0;
+			margin-left: -1000px;
+	}
+	10% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 1;
+			margin-left: 100%;
+	}
+}
+
+@-webkit-keyframes shortAnimateCloud {
+	0% {
+		opacity: 0;
+			margin-left: 20%;
+	}
+	10% {
+		opacity: 0.6;
+	}
+	95% {
+		opacity: 0.8;
+	}
+	100% {
+		opacity: 0;
+		margin-left: 50%;
+	}
+}
+
+@-moz-keyframes shortAnimateCloud {
+	0% {
+		opacity: 0;
+			margin-left: 20%;
+	}
+	10% {
+		opacity: 0.6;
+	}
+	95% {
+		opacity: 0.8;
+	}
+	100% {
+		opacity: 0;
+		margin-left: 50%;
+	}
+}
+
+@keyframes shortAnimateCloud {
+	0% {
+		opacity: 0;
+			margin-left: 20%;
+	}
+	10% {
+		opacity: 0.6;
+	}
+	95% {
+		opacity: 0.8;
+	}
+	100% {
+		opacity: 0;
+		margin-left: 50%;
+	}
+}
+
+/* ANIMATIONS */
+
+#header .cloudbox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.cloud {
+	opacity: 0;
+  position: relative;
+  background: url('../../images/cloud.png') no-repeat;
+  background-size: contain;
+  z-index: 1;
+}
+
+#cloud1 {
+	height: 100% !important;
+  width: 200% !important;
+
+	-webkit-animation: animateCloud 35s linear infinite;
+  -moz-animation: animateCloud 35s linear infinite;
+  animation: animateCloud 35s linear infinite;
+
+	transform: translate3d(10%, 0, 0);
+}
+
+#cloud2 {
+	height: 40% !important;
+  width: 50% !important;
+
+	transform: translate3d(100%, -250%, 0);
+
+	-webkit-animation: shortAnimateCloud 20s linear infinite;
+  -moz-animation: shortAnimateCloud 20s linear infinite;
+  animation: shortAnimateCloud 20s linear infinite;
+	animation-delay: 1000ms;
+}
+
+#cloud3 {
+	height: 100% !important;
+  width: 200% !important;
+
+	-webkit-animation: animateCloud 35s linear infinite;
+  -moz-animation: animateCloud 35s linear infinite;
+  animation: animateCloud 35s linear infinite;
+
+	transform: translate3d(60%, -120%, 0);
+}
+
+#cloud4 {
+	height: 55% !important;
+  width: 50% !important;
+
+	transform: translate3d(10%, -450%, 0);
+
+	-webkit-animation: shortAnimateCloud 20s linear infinite;
+  -moz-animation: shortAnimateCloud 20s linear infinite;
+  animation: shortAnimateCloud 20s linear infinite;
+	animation-delay: 2000ms;
+}
