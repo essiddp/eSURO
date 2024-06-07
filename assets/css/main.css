@@ -3111,6 +3111,19 @@ input, select, textarea {
 	.input-container input {
 		flex: 1; /* make the input field take up the available space */
 	}
+
+	.clue-field {
+		display: flex;
+		align-items: center;
+	}
+	
+	.clue-field label {
+		margin-right: 10px; /* adjust the margin to your liking */
+	}
+	
+	.clue-field input {
+		flex: 1; /* make the input field take up the available space */
+	}
 	
 	.button-group {
 		display: flex;

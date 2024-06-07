@@ -44,183 +44,187 @@
     </div>
 
     <script>
-            class JeopardyGame {
-                constructor(element) {
-                    // Database
-                    this.categories = [];
-                    this.clues = {};
-    
-                    // State
-                    this.currentClue = null;
-                    this.score = 0;
-    
-                    // Elements
-                    this.boardElement = element.querySelector(".board");
-                    this.scoreCountElement = element.querySelector(".score-count");
-                    this.formElement = element.querySelector("form");
-                    this.choicesElement = element.querySelector(".choices");
-                    this.modalElement = element.querySelector(".card-modal");
-                    this.clueTextElement = element.querySelector(".clue-text");
-                    this.resultElement = element.querySelector(".result");
-                    this.resultTextElement = element.querySelector(".result_correct-answer-text");
-                    this.successTextElement = element.querySelector(".result_success");
-                    this.failTextElement = element.querySelector(".result_fail");
-                }
-    
-                initGame() {
-                    // Bind event handlers
-                    this.boardElement.addEventListener("click", event => {
-                        if (event.target.dataset.clueId) {
-                            this.handleClueClick(event);
-                        }
+        class JeopardyGame {
+            constructor(element) {
+                // Database
+                this.categories = [];
+                this.clues = {};
+
+                // State
+                this.currentClue = null;
+                this.score = 0;
+
+                // Elements
+                this.boardElement = element.querySelector(".board");
+                this.scoreCountElement = element.querySelector(".score-count");
+                this.formElement = element.querySelector("form");
+                this.choicesElement = element.querySelector(".choices");
+                this.modalElement = element.querySelector(".card-modal");
+                this.clueTextElement = element.querySelector(".clue-text");
+                this.resultElement = element.querySelector(".result");
+                this.resultTextElement = element.querySelector(".result_correct-answer-text");
+                this.successTextElement = element.querySelector(".result_success");
+                this.failTextElement = element.querySelector(".result_fail");
+            }
+
+            initGame() {
+                // Bind event handlers
+                this.boardElement.addEventListener("click", event => {
+                    if (event.target.dataset.clueId) {
+                        this.handleClueClick(event);
+                    }
+                });
+                this.formElement.addEventListener("submit", event => {
+                    this.handleFormSubmit(event);
+                });
+
+                // Render initial state of score
+                this.updateScore(0);
+            }
+
+            renderCategory(category) {
+                let column = document.createElement("div");
+                column.classList.add("column");
+                column.innerHTML = (
+                    `<header>${category.title}</header>
+                     <ul>
+                     </ul>`
+                ).trim();
+
+                var ul = column.querySelector("ul");
+                category.clues.forEach(clueId => {
+                    var clue = this.clues[clueId];
+                    ul.innerHTML += `<li><button data-clue-id=${clueId}>${clue.value}</button></li>`
+                });
+
+                // Add to DOM
+                this.boardElement.appendChild(column);
+            }
+            
+            updateScore(change) {
+                this.score += change;
+                this.scoreCountElement.textContent = this.score;
+            }
+
+            handleClueClick(event) {
+                var clue = this.clues[event.target.dataset.clueId];
+
+                // Mark this button as used
+                event.target.classList.add("used");
+
+                // Clear out the input field
+                this.choicesElement.innerHTML = "";
+
+                // Update current clue
+                this.currentClue = clue;
+
+                // Update the text
+                this.clueTextElement.textContent = this.currentClue.question;
+                this.resultTextElement.textContent = this.currentClue.answer;
+
+                // Hide the result
+                this.modalElement.classList.remove("showing-result");
+
+                // Show the modal
+                this.modalElement.classList.add("visible");
+                
+                this.currentClue.choices.forEach(choice => 
+                {
+                    const button = document.createElement("button");
+                    button.textContent = choice;
+                    button.addEventListener("click", event =>
+                    {
+                        event.preventDefault();
+                        this.handleFormSubmit(new Event("submit"), choice);
+                        console.log(choice);
                     });
-                    this.formElement.addEventListener("submit", event => {
-                        this.handleFormSubmit(event);
-                    });
-        
-                    // Render initial state of score
-                    this.updateScore(0);
+                    this.choicesElement.appendChild(button);
+                });
+            }
+
+            // Handle an answer from user
+            handleFormSubmit(event, answer) {
+                event.preventDefault();
+
+                var isCorrect = answer === this.currentClue.answer;
+                console.log(answer);
+                console.log(this.currentClue.answer);
+                if (isCorrect) {
+                    this.updateScore(this.currentClue.value);
                 }
 
-                renderCategory(category) {
-                    let column = document.createElement("div");
-                    column.classList.add("column");
-                    column.innerHTML = (
-                        `<header>${category.title}</header>
-                         <ul>
-                         </ul>`
-                    ).trim();
-    
-                    var ul = column.querySelector("ul");
-                    category.clues.forEach(clueId => {
-                        var clue = this.clues[clueId];
-                        ul.innerHTML += `<li><button data-clue-id=${clueId}>${clue.value}</button></li>`
-                    });
-    
-                    // Add to DOM
-                    this.boardElement.appendChild(column);
-                }
-                
-                updateScore(change) {
-                    this.score += change;
-                    this.scoreCountElement.textContent = this.score;
-                }
-    
-                handleClueClick(event) {
-                    var clue = this.clues[event.target.dataset.clueId];
-    
-                    // Mark this button as used
-                    event.target.classList.add("used");
-    
-                    // Clear out the input field
-                    this.choicesElement.innerHTML = "";
-    
-                    // Update current clue
-                    this.currentClue = clue;
-    
-                    // Update the text
-                    this.clueTextElement.textContent = this.currentClue.question;
-                    this.resultTextElement.textContent = this.currentClue.answer;
-    
-                    // Hide the result
-                    this.modalElement.classList.remove("showing-result");
-    
-                    // Show the modal
-                    this.modalElement.classList.add("visible");
-                    
-                    this.currentClue.choices.forEach(choice => 
-                    {
-                        const button = document.createElement("button");
-                        button.textContent = choice;
-                        button.addEventListener("click", event =>
-                        {
-                            event.preventDefault();
-                            this.handleFormSubmit(new Event("submit"), choice);
-                            console.log(choice);
-                        });
-                        this.choicesElement.appendChild(button);
-                    });
-                }
-    
-                // Handle an answer from user
-                handleFormSubmit(event, answer) {
-                    event.preventDefault();
-    
-                    var isCorrect = answer === this.currentClue.answer;
-                    console.log(answer);
-                    console.log(this.currentClue.answer);
-                    if (isCorrect) {
-                        this.updateScore(this.currentClue.value);
-                    }
-    
-                    // Show answer
-                    this.revealAnswer(isCorrect);
-                }
-    
-                revealAnswer(isCorrect) {
-                    // Show the individual success/fail case
-                    this.successTextElement.style.display = isCorrect ? "block" : "none";
-                    this.failTextElement.style.display = !isCorrect ? "block" : "none";
-    
-                    // Show the whole result container
-                    this.modalElement.classList.add("showing-result");
-    
-                    // Disappear after a short bit
-                    setTimeout(() => {
-                        this.modalElement.classList.remove("visible");
-                    }, 3000);
-                }
-    
-                // Function to add custom category and clues
-                addCustomCategoryAndClues(categoryTitle, clueObjects) {
-                    // Create category object
-                    var category = {
-                        title: categoryTitle,
-                        clues: []
-                    };
-    
-                    // Add clues to the category
-                    clueObjects.forEach((clue, index) => {
-                        // Create unique ID for this clue
-                        var clueId = categoryTitle.toLowerCase().replace(/\s+/g, '-') + "-" + index;
-                        category.clues.push(clueId);
-    
-                        // Add clue to DB
-                        this.clues[clueId] = {
-                            question: clue.question,
-                            answer: clue.answer,
-                            choices: [clue.answer, clue.decoy1, clue.decoy2, clue.decoy3],
-                            value: (index + 1) * 100
-                        };
-                    });
-    
-                    // Add category to categories array
-                    this.categories.push(category);
-    
-                    // Render the category on the board
-                    this.renderCategory(category);
-                }
+                // Show answer
+                this.revealAnswer(isCorrect);
             }
-            // Retrieve data from localStorage
-            const jeopardyData = JSON.parse(localStorage.getItem("jeopardyData"));
-            
-            // Check if data exists
-            if (jeopardyData) {
-                // If data exists, display the game board
-                const appElement = document.querySelector(".app");
-                appElement.style.display = "block";
-        
-                // Initialize the game with retrieved data
-                const game = new JeopardyGame(appElement);
-                jeopardyData.forEach(category => {
-                    game.addCustomCategoryAndClues(category.categoryTitle, category.clues);
+
+            revealAnswer(isCorrect) {
+                // Show the individual success/fail case
+                this.successTextElement.style.display = isCorrect ? "block" : "none";
+                this.failTextElement.style.display = !isCorrect ? "block" : "none";
+
+                // Show the whole result container
+                this.modalElement.classList.add("showing-result");
+
+                // Disappear after a short bit
+                setTimeout(() => {
+                    this.modalElement.classList.remove("visible");
+                }, 3000);
+            }
+
+            // Function to add custom category and clues
+            addCustomCategoryAndClues(categoryTitle, clueObjects) {
+                // Create category object
+                var category = {
+                    title: categoryTitle,
+                    clues: []
+                };
+
+                // Add clues to the category
+                clueObjects.forEach((clue, index) => {
+                    // Create unique ID for this clue
+                    var clueId = categoryTitle.toLowerCase().replace(/\s+/g, '-') + "-" + index;
+                    category.clues.push(clueId);
+
+                    // Add clue to DB
+                    this.clues[clueId] = {
+                        question: clue.question,
+                        answer: clue.answer,
+                        choices: [clue.answer, clue.decoy1, clue.decoy2, clue.decoy3],
+                        value: (index + 1) * 100
+                    };
                 });
-                game.initGame();
-            } else {
-                // If no data exists, show an alert and redirect to questions.html
-                alert("No data found. Please go back and enter questions.");
-                window.location.href
-            }            
-        </script>
+
+                // Add category to categories array
+                this.categories.push(category);
+
+                // Render the category on the board
+                this.renderCategory(category);
+            }
+        }
+
+        // Retrieve data from localStorage
+        let jeopardyData = JSON.parse(localStorage.getItem("jeopardyData"));
+
+        // Filter out null values from the data array
+        jeopardyData = jeopardyData.filter(item => item !== null);
+
+        // Check if data exists
+        if (jeopardyData.length > 0) {
+            // If data exists, display the game board
+            const appElement = document.querySelector(".app");
+            appElement.style.display = "block";
+
+            // Initialize the game with retrieved data
+            const game = new JeopardyGame(appElement);
+            jeopardyData.forEach(category => {
+                game.addCustomCategoryAndClues(category.categoryTitle, category.clues);
+            });
+            game.initGame();
+        } else {
+            // If no data exists, show an alert and redirect to questions.html
+            alert("No data found. Please go back and enter questions.");
+            window.location.href = 'questions.html';
+        }
+    </script>
 </body>
 </html>

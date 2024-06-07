@@ -81,12 +81,13 @@
                 <input type="text" class="clue-question" name="clue-${clueCounter}-question" required />
                 <label for="clue-${clueCounter}-answer">Answer:</label>
                 <input type="text" class="clue-answer" name="clue-${clueCounter}-answer" required />
-                <button type="button" class="add-remove-button" onclick="removeClueField(this)">Delete Question</button>
+                
                 <br>
                 <label for="clue-${clueCounter}-decoy">Decoys:</label>
                 <input type="text" class="clue-decoy1" name="clue-${clueCounter}-decoy1" required />
                 <input type="text" class="clue-decoy2" name="clue-${clueCounter}-decoy2" required />
                 <input type="text" class="clue-decoy3" name="clue-${clueCounter}-decoy3" required />
+                <button type="button" class="add-remove-button" id = "remove-${clueCounter}" onclick="removeClueField(this)">X</button>
             `;
             clueFieldsDiv.appendChild(newClueField);
             clueCounter++;
@@ -151,13 +152,15 @@
             }
             return null;
         }
-
+        
         function appendCategory(formData) {
             let jeopardyData = JSON.parse(localStorage.getItem("jeopardyData")) || [];
+            console.log("Appending FormData:", formData);  // Add this line for debugging
             jeopardyData.push(formData);
             localStorage.setItem("jeopardyData", JSON.stringify(jeopardyData));
             loadSavedCategories();
         }
+        
 
         function updateCategory(formData) {
             let jeopardyData = JSON.parse(localStorage.getItem("jeopardyData")) || [];
@@ -213,30 +216,32 @@
             const savedCategoriesList = document.getElementById("saved-categories");
             savedCategoriesList.innerHTML = "";
             savedCategories.forEach((category, index) => {
-                const listItem = document.createElement("li");
-                const categItem = document.createElement("span");
-                const buttonsItem = document.createElement("span");
-                categItem.textContent = `Category: ${category.categoryTitle}, Number of Clues: ${category.clues.length}`;
-                categItem.style.color = "white";
-                categItem.style.display = "inline-block";
-                categItem.style.width = "420px";
-                const editButton = document.createElement("button");
-                editButton.textContent = "Edit";
-                editButton.style.marginRight = "20px";
-                editButton.addEventListener("click", () => editCategory(index));
-                const deleteButton = document.createElement("button");
-                deleteButton.textContent = "Delete";
-                deleteButton.addEventListener("click", () => deleteCategory(index));
-
-                buttonsItem.style.display = "inline-block";
-                buttonsItem.style.width = "420px";
-
-                listItem.style.marginBottom = "10px";
-                buttonsItem.appendChild(editButton);
-                buttonsItem.appendChild(deleteButton);
-                listItem.appendChild(categItem);
-                listItem.appendChild(buttonsItem);
-                savedCategoriesList.appendChild(listItem);
+                if (category) { // Add this check
+                    const listItem = document.createElement("li");
+                    const categItem = document.createElement("span");
+                    const buttonsItem = document.createElement("span");
+                    categItem.textContent = `Category: ${category.categoryTitle}, Number of Clues: ${category.clues.length}`;
+                    categItem.style.color = "white";
+                    categItem.style.display = "inline-block";
+                    categItem.style.width = "420px";
+                    const editButton = document.createElement("button");
+                    editButton.textContent = "Edit";
+                    editButton.style.marginRight = "20px";
+                    editButton.addEventListener("click", () => editCategory(index));
+                    const deleteButton = document.createElement("button");
+                    deleteButton.textContent = "Delete";
+                    deleteButton.addEventListener("click", () => deleteCategory(index));
+        
+                    buttonsItem.style.display = "inline-block";
+                    buttonsItem.style.width = "420px";
+        
+                    listItem.style.marginBottom = "10px";
+                    buttonsItem.appendChild(editButton);
+                    buttonsItem.appendChild(deleteButton);
+                    listItem.appendChild(categItem);
+                    listItem.appendChild(buttonsItem);
+                    savedCategoriesList.appendChild(listItem);
+                }
             });
         }
 
@@ -244,12 +249,17 @@
             const jeopardyData = JSON.parse(localStorage.getItem("jeopardyData")) || [];
             const category = jeopardyData[index];
             document.getElementById("category-title").value = category.categoryTitle;
-            let diff = category.clues.length - 3;
-            console.log(diff);
-            while (diff > 0)
-            {
-                document.getElementById("spawn-button").click();
-                diff--;
+            // Adjust the number of clues fields if necessary
+            if (category.clues.length > clueCounter) {
+                let diff = category.clues.length - clueCounter;
+                for (let i = 0; i < diff; i++) {
+                    addClueField();
+                }
+            } else if (category.clues.length < clueCounter) {
+                let diff = clueCounter - category.clues.length;
+                for (let i = 0; i < diff; i++) {
+                    removeClueField();
+                }
             }
             // Loop through clues and set input values
             category.clues.forEach((clue, i) => {
@@ -262,7 +272,7 @@
             document.getElementById("add-button").style.display = "none";
             document.getElementById("save-button").style.display = "block";
             document.getElementById("save-button").setAttribute("data-index", index.toString());
-        }
+        }        
         
         function deleteCategory(index) {
             let jeopardyData = JSON.parse(localStorage.getItem("jeopardyData")) || [];
