@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible"="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../assets/css/main.css">
     <title>Edit Questions and Answers</title>
@@ -18,11 +18,10 @@
             <div class="button-group">
                 <button type="button" id="add-button">Save Category</button>
                 <button type="button" id="save-button" style="display: none;">Save Changes</button>
-                <button type="button" class="add-remove-button" id="spawn-button" onclick="addClueField(this)">Add Question</button>
+                <button type="button" class="add-remove-button" id="spawn-button" onclick="addClueField()">Add Question</button>
             </div>
         </div>
         <div id="clue-fields">
-            
             <!-- Initialize with three question fields -->
             <div class="clue-field">
                 <label for="clue-0-question">Question:</label>
@@ -61,32 +60,30 @@
         <!-- Add more clues as needed -->
     </form>
 
-    <!-- Display saved categories/questions -->
     <br>
-    <h2>Saved Categories/Questions:</h2>
+    <h2>Category (Questions):</h2>
     <ul id="saved-categories"></ul>
 
     <button class="AppButton" onclick="window.location.href = 'indexJeopardy.html'">BACK</button>
 
     <script>
-        let clueCounter = 3; // Set the initial counter to 3
+        let clueCounter = 3;
 
         function addClueField(button) {
             const clueFieldsDiv = document.getElementById("clue-fields");
             const newClueField = document.createElement('div');
             newClueField.classList.add('clue-field');
-            // Use the current clueCounter value to generate unique names
             newClueField.innerHTML = `
                 <label for="clue-${clueCounter}-question">Question:</label>
                 <input type="text" class="clue-question" name="clue-${clueCounter}-question" required />
                 <label for="clue-${clueCounter}-answer">Answer:</label>
                 <input type="text" class="clue-answer" name="clue-${clueCounter}-answer" required />
-                <button type="button" class="add-remove-button" id = "remove-${clueCounter}" onclick="removeClueField(this)">Delete Question</button>
                 <br>
                 <label for="clue-${clueCounter}-decoy">Decoys:</label>
                 <input type="text" class="clue-decoy1" name="clue-${clueCounter}-decoy1" required />
                 <input type="text" class="clue-decoy2" name="clue-${clueCounter}-decoy2" required />
                 <input type="text" class="clue-decoy3" name="clue-${clueCounter}-decoy3" required />
+                <button type="button" class="add-remove-button" id="remove-${clueCounter}" onclick="removeClueField(this)">X</button>
             `;
             clueFieldsDiv.appendChild(newClueField);
             clueCounter++;
@@ -103,21 +100,19 @@
             document.getElementById("add-button").style.display = "none";
             document.getElementById("save-button").style.display = "block";
         });
-        
+
         document.getElementById("save-button").addEventListener("click", () => {
             saveCategory();
             document.getElementById("add-button").style.display = "block";
             document.getElementById("save-button").style.display = "none";
-        });        
+        });
 
         function addCategory() {
             const formData = getFormData();
             if (formData) {
                 appendCategory(formData);
                 resetForm();
-                
             }
-            
         }
 
         function saveCategory() {
@@ -141,9 +136,8 @@
                 const decoy3 = formData.get(`clue-${i}-decoy3`);
                 if (question && answer && decoy1) {
                     clues.push({ question, answer, decoy1, decoy2, decoy3 });
-                }
-                else if (question && answer) {
-                    clues.push({ question, answer});
+                } else if (question && answer) {
+                    clues.push({ question, answer });
                 }
             }
             if (categoryTitle && clues.length > 0) {
@@ -169,116 +163,121 @@
 
         function resetForm() {
             document.getElementById("edit-questions-form").reset();
-            clueCounter = 3; // Reset counter to 3
-            // Reinitialize with three question fields
+            clueCounter = 3;
             document.getElementById("clue-fields").innerHTML = `
-            <div class="clue-field">
-                <label for="clue-0-question">Question:</label>
-                <input type="text" class="clue-question" name="clue-0-question" required />
-                <label for="clue-0-answer">Answer:</label>
-                <input type="text" class="clue-answer" name="clue-0-answer" required />
-                <br>
-                <label for="clue-0-decoy">Decoys:</label>
-                <input type="text" class="clue-decoy1" name="clue-0-decoy1" required />
-                <input type="text" class="clue-decoy2" name="clue-0-decoy2" required />
-                <input type="text" class="clue-decoy3" name="clue-0-decoy3" required />
-            </div>
-            <div class="clue-field">
-                <label for="clue-1-question">Question:</label>
-                <input type="text" class="clue-question" name="clue-1-question" required />
-                <label for="clue-1-answer">Answer:</label>
-                <input type="text" class="clue-answer" name="clue-1-answer" required />
-                <br>
-                <label for="clue-1-decoy">Decoys:</label>
-                <input type="text" class="clue-decoy1" name="clue-1-decoy1" required />
-                <input type="text" class="clue-decoy2" name="clue-1-decoy2" required />
-                <input type="text" class="clue-decoy3" name="clue-1-decoy3" required />
-            </div>
-            <div class="clue-field">
-                <label for="clue-2-question">Question:</label>
-                <input type="text" class="clue-question" name="clue-2-question" required />
-                <label for="clue-2-answer">Answer:</label>
-                <input type="text" class="clue-answer" name="clue-2-answer" required />
-                <br>
-                <label for="clue-2-decoy">Decoys:</label>
-                <input type="text" class="clue-decoy1" name="clue-2-decoy1" required />
-                <input type="text" class="clue-decoy2" name="clue-2-decoy2" required />
-                <input type="text" class="clue-decoy3" name="clue-2-decoy3" required />
-            </div>
+                <div class="clue-field">
+                    <label for="clue-0-question">Question:</label>
+                    <input type="text" class="clue-question" name="clue-0-question" required />
+                    <label for="clue-0-answer">Answer:</label>
+                    <input type="text" class="clue-answer" name="clue-0-answer" required />
+                    <br>
+                    <label for="clue-0-decoy">Decoys:</label>
+                    <input type="text" class="clue-decoy1" name="clue-0-decoy1" required />
+                    <input type="text" class="clue-decoy2" name="clue-0-decoy2" required />
+                    <input type="text" class="clue-decoy3" name="clue-0-decoy3" required />
+                </div>
+                <div class="clue-field">
+                    <label for="clue-1-question">Question:</label>
+                    <input type="text" class="clue-question" name="clue-1-question" required />
+                    <label for="clue-1-answer">Answer:</label>
+                    <input type="text" class="clue-answer" name="clue-1-answer" required />
+                    <br>
+                    <label for="clue-1-decoy">Decoys:</label>
+                    <input type="text" class="clue-decoy1" name="clue-1-decoy1" required />
+                    <input type="text" class="clue-decoy2" name="clue-1-decoy2" required />
+                    <input type="text" class="clue-decoy3" name="clue-1-decoy3" required />
+                </div>
+                <div class="clue-field">
+                    <label for="clue-2-question">Question:</label>
+                    <input type="text" class="clue-question" name="clue-2-question" required />
+                    <label for="clue-2-answer">Answer:</label>
+                    <input type="text" class="clue-answer" name="clue-2-answer" required />
+                    <br>
+                    <label for="clue-2-decoy">Decoys:</label>
+                    <input type="text" class="clue-decoy1" name="clue-2-decoy1" required />
+                    <input type="text" class="clue-decoy2" name="clue-2-decoy2" required />
+                    <input type="text" class="clue-decoy3" name="clue-2-decoy3" required />
+                </div>
             `;
         }
 
         function loadSavedCategories() {
-            const savedCategories = JSON.parse(localStorage.getItem("jeopardyData")) || [];
             const savedCategoriesList = document.getElementById("saved-categories");
             savedCategoriesList.innerHTML = "";
-            savedCategories.forEach((category, index) => {
-                const listItem = document.createElement("li");
-                const categItem = document.createElement("span");
-                const buttonsItem = document.createElement("span");
-                categItem.textContent = `Category: ${category.categoryTitle}, Number of Clues: ${category.clues.length}`;
-                categItem.style.color = "white";
-                categItem.style.display = "inline-block";
-                categItem.style.width = "420px";
-                const editButton = document.createElement("button");
-                editButton.textContent = "Edit";
-                editButton.style.marginRight = "20px";
-                editButton.addEventListener("click", () => editCategory(index));
-                const deleteButton = document.createElement("button");
-                deleteButton.textContent = "Delete";
-                deleteButton.addEventListener("click", () => deleteCategory(index));
+            const jeopardyData = JSON.parse(localStorage.getItem("jeopardyData")) || [];
+            if (!Array.isArray(jeopardyData)) {
+                console.error("jeopardyData is not an array", jeopardyData);
+                return;
+            }
+            jeopardyData.forEach((category, index) => {
+                if (category && category.categoryTitle) {
+                    const listItem = document.createElement("li");
+                    listItem.classList.add("category-item");
 
-                buttonsItem.style.display = "inline-block";
-                buttonsItem.style.width = "420px";
+                    const categoryDetails = document.createElement("div");
+                    categoryDetails.classList.add("category-details");
+                    categoryDetails.textContent = `● ${category.categoryTitle} (${category.clues.length})`;
+                    
+                    const buttonGroup = document.createElement("div");
+                    buttonGroup.classList.add("button-group");
+                    buttonGroup.appendChild(createEditButton(index));
+                    buttonGroup.appendChild(createDeleteButton(index));
 
-                listItem.style.marginBottom = "10px";
-                buttonsItem.appendChild(editButton);
-                buttonsItem.appendChild(deleteButton);
-                listItem.appendChild(categItem);
-                listItem.appendChild(buttonsItem);
-                savedCategoriesList.appendChild(listItem);
+                    listItem.appendChild(categoryDetails);
+                    listItem.appendChild(buttonGroup);
+                    savedCategoriesList.appendChild(listItem);
+                } else {
+                    console.warn("Invalid category data at index", index, category);
+                }
             });
+        }
+
+        function createEditButton(index) {
+            const editButton = document.createElement("button");
+            editButton.textContent = "Edit";
+            editButton.classList.add("AppButton");
+            editButton.addEventListener("click", () => editCategory(index));
+            return editButton;
+        }
+
+        function createDeleteButton(index) {
+            const deleteButton = document.createElement("button");
+            deleteButton.textContent = "Delete";
+            deleteButton.classList.add("AppButton");
+            deleteButton.addEventListener("click", () => deleteCategory(index));
+            return deleteButton;
         }
 
         function editCategory(index) {
-            function fieldFixer(category)
-            {
-                let diff = category.clues.length - clueCounter;
-                console.log(diff);
-                while (diff > 0)
-                {
-                    document.getElementById("spawn-button").click();
-                    diff--;
-                }
-            }
-
             const jeopardyData = JSON.parse(localStorage.getItem("jeopardyData")) || [];
             const category = jeopardyData[index];
-          
-            if (category.clues.length > clueCounter)
-            {
-                fieldFixer(category);
+            if (category) {
+                document.getElementById("category-title").value = category.categoryTitle;
+                const clueFieldsDiv = document.getElementById("clue-fields");
+                clueFieldsDiv.innerHTML = "";
+                category.clues.forEach((clue, i) => {
+                    const clueField = document.createElement('div');
+                    clueField.classList.add('clue-field');
+                    clueField.innerHTML = `
+                        <label for="clue-${i}-question">Question:</label>
+                        <input type="text" class="clue-question" name="clue-${i}-question" value="${clue.question}" required />
+                        <label for="clue-${i}-answer">Answer:</label>
+                        <input type="text" class="clue-answer" name="clue-${i}-answer" value="${clue.answer}" required />
+                        <br>
+                        <label for="clue-${i}-decoy">Decoys:</label>
+                        <input type="text" class="clue-decoy1" name="clue-${i}-decoy1" value="${clue.decoy1}" required />
+                        <input type="text" class="clue-decoy2" name="clue-${i}-decoy2" value="${clue.decoy2}" required />
+                        <input type="text" class="clue-decoy3" name="clue-${i}-decoy3" value="${clue.decoy3}" required />
+                    `;
+                    clueFieldsDiv.appendChild(clueField);
+                });
+                clueCounter = category.clues.length;
+                document.getElementById("save-button").setAttribute("data-index", index);
+                document.getElementById("add-button").style.display = "none";
+                document.getElementById("save-button").style.display = "block";
             }
-            else if (category.clues.length < clueCounter)
-            {
-                resetForm();
-                fieldFixer(category);
-            }
-
-            document.getElementById("category-title").value = category.categoryTitle;
-            // Loop through clues and set input values
-            category.clues.forEach((clue, i) => {
-                document.querySelector(`input[name="clue-${i}-question"]`).value = clue.question;
-                document.querySelector(`input[name="clue-${i}-answer"]`).value = clue.answer;
-                document.querySelector(`input[name="clue-${i}-decoy1"]`).value = clue.decoy1;
-                document.querySelector(`input[name="clue-${i}-decoy2"]`).value = clue.decoy2;
-                document.querySelector(`input[name="clue-${i}-decoy3"]`).value = clue.decoy3;
-            });
-            document.getElementById("add-button").style.display = "none";
-            document.getElementById("save-button").style.display = "block";
-            document.getElementById("save-button").setAttribute("data-index", index.toString());
         }
-        
+
         function deleteCategory(index) {
             let jeopardyData = JSON.parse(localStorage.getItem("jeopardyData")) || [];
             jeopardyData.splice(index, 1);
@@ -286,7 +285,7 @@
             loadSavedCategories();
         }
 
-        loadSavedCategories();
+        document.addEventListener("DOMContentLoaded", loadSavedCategories);
     </script>
 </body>
 </html>

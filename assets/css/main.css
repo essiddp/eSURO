@@ -3133,6 +3133,22 @@ input, select, textarea {
 	.button-group button {
 		margin-left: 10px; /* adjust the margin to your liking */
 	}	
+
+	.category-buttons {
+		display: flex;
+		gap: 10px;
+	}
+	
+	.category-item {
+		display: flex;
+		width: 50%;
+		align-items: center;
+		margin-bottom: 10px;
+	}
+	.category-details {
+		flex: 1;
+		color: white;
+	}
 		
 	/* scroll */
 
