@@ -81,7 +81,7 @@
                 <input type="text" class="clue-question" name="clue-${clueCounter}-question" required />
                 <label for="clue-${clueCounter}-answer">Answer:</label>
                 <input type="text" class="clue-answer" name="clue-${clueCounter}-answer" required />
-                
+                <button type="button" class="add-remove-button" onclick="removeClueField(this)">Delete Question</button>
                 <br>
                 <label for="clue-${clueCounter}-decoy">Decoys:</label>
                 <input type="text" class="clue-decoy1" name="clue-${clueCounter}-decoy1" required />
@@ -249,17 +249,12 @@
             const jeopardyData = JSON.parse(localStorage.getItem("jeopardyData")) || [];
             const category = jeopardyData[index];
             document.getElementById("category-title").value = category.categoryTitle;
-            // Adjust the number of clues fields if necessary
-            if (category.clues.length > clueCounter) {
-                let diff = category.clues.length - clueCounter;
-                for (let i = 0; i < diff; i++) {
-                    addClueField();
-                }
-            } else if (category.clues.length < clueCounter) {
-                let diff = clueCounter - category.clues.length;
-                for (let i = 0; i < diff; i++) {
-                    removeClueField();
-                }
+            let diff = category.clues.length - 3;
+            console.log(diff);
+            while (diff > 0)
+            {
+                document.getElementById("spawn-button").click();
+                diff--;
             }
             // Loop through clues and set input values
             category.clues.forEach((clue, i) => {
