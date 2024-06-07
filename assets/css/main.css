@@ -3216,6 +3216,11 @@ input, select, textarea {
 		color: var(--white);
 	}
 
+	#edit-questions-form input
+	{
+		background-color: white;
+	}
+
 /* KEYFRAMES */
 
 @-webkit-keyframes animateCloud {
