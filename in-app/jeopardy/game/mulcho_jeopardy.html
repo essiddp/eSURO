@@ -128,7 +128,16 @@
                 // Show the modal
                 this.modalElement.classList.add("visible");
                 
-                this.currentClue.choices.forEach(choice => 
+                let choiceArray = this.currentClue.choices;
+                console.log(choiceArray);
+
+                //FisherYatesShuffler for choices
+                for (let i = choiceArray.length - 1; i > 0; i--)
+                {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [choiceArray[i], choiceArray[j]] = [choiceArray[j], choiceArray[i]];
+                }
+                choiceArray.forEach(choice =>
                 {
                     const button = document.createElement("button");
                     button.textContent = choice;
