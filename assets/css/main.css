@@ -3099,7 +3099,27 @@ input, select, textarea {
 		background: var(--cream-hover);
 	}
 	
-		
+	.input-container {
+		display: flex;
+		align-items: center;
+	}
+	
+	.input-container label {
+		margin-right: 10px; /* adjust the margin to your liking */
+	}
+	
+	.input-container input {
+		flex: 1; /* make the input field take up the available space */
+	}
+	
+	.button-group {
+		display: flex;
+		flex-direction: row;
+	}
+	
+	.button-group button {
+		margin-left: 10px; /* adjust the margin to your liking */
+	}	
 		
 	/* scroll */
 
