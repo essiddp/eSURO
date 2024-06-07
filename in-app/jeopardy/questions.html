@@ -81,7 +81,7 @@
                 <input type="text" class="clue-question" name="clue-${clueCounter}-question" required />
                 <label for="clue-${clueCounter}-answer">Answer:</label>
                 <input type="text" class="clue-answer" name="clue-${clueCounter}-answer" required />
-                <button type="button" class="add-remove-button" onclick="removeClueField(this)">Delete Question</button>
+                <button type="button" class="add-remove-button" id = "remove-${clueCounter}" onclick="removeClueField(this)">Delete Question</button>
                 <br>
                 <label for="clue-${clueCounter}-decoy">Decoys:</label>
                 <input type="text" class="clue-decoy1" name="clue-${clueCounter}-decoy1" required />
@@ -241,16 +241,31 @@
         }
 
         function editCategory(index) {
+            function fieldFixer(category)
+            {
+                let diff = category.clues.length - clueCounter;
+                console.log(diff);
+                while (diff > 0)
+                {
+                    document.getElementById("spawn-button").click();
+                    diff--;
+                }
+            }
+
             const jeopardyData = JSON.parse(localStorage.getItem("jeopardyData")) || [];
             const category = jeopardyData[index];
-            document.getElementById("category-title").value = category.categoryTitle;
-            let diff = category.clues.length - 3;
-            console.log(diff);
-            while (diff > 0)
+          
+            if (category.clues.length > clueCounter)
             {
-                document.getElementById("spawn-button").click();
-                diff--;
+                fieldFixer(category);
             }
+            else if (category.clues.length < clueCounter)
+            {
+                resetForm();
+                fieldFixer(category);
+            }
+
+            document.getElementById("category-title").value = category.categoryTitle;
             // Loop through clues and set input values
             category.clues.forEach((clue, i) => {
                 document.querySelector(`input[name="clue-${i}-question"]`).value = clue.question;
