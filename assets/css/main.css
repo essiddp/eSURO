@@ -3162,13 +3162,34 @@ input, select, textarea {
 	
 	.category-item {
 		display: flex;
-		width: 50%;
+		width: 80%;
+		margin: auto;
+		padding-right: 20px;
 		align-items: center;
-		margin-bottom: 10px;
+		padding-bottom: 20px;
 	}
+	
 	.category-details {
 		flex: 1;
-		color: white;
+		font-size: large;
+		font-weight: 500;
+		text-align: left;
+		color: var(--cream)
+	}
+
+	.boxCategory {
+		margin: auto;
+		width: 80%;
+		background-color: var(--xblue);
+		border-radius: 20px;
+		text-align: center;
+	}
+	
+	.boxCategory h2 {
+		color: var(--xyellow);
+		size: 20px;
+		padding-top: 15pt;
+		padding-bottom: 20pt;
 	}
 		
 	/* scroll */
@@ -3293,9 +3314,19 @@ input, select, textarea {
 		height: 100vh;
 	}
 	#triangle{
+		margin-top: 2%;
 		font-size: 70%;
 		font-family: 'Montserrat Bold';
 		line-height: 25px;
+	}
+	
+	#triangleForm {
+		text-align: left;
+		margin: auto;
+	}
+
+	#triangleForm input[type=number] {
+		width: 100px;
 	}
 
 	.indexTitle {
@@ -3470,6 +3501,7 @@ input, select, textarea {
 
 .pad {
 	padding: 2em;
+	background:  radial-gradient(#281c3e, #0f051d);
 }
 
 .imgbutton:hover {
