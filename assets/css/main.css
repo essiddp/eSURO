@@ -1989,6 +1989,7 @@ input, select, textarea {
 
 		#header h1 {
 			color: var(--xyellow);
+			text-shadow: 1px 2px 8px #0000005a;
 			font-family: 'Montserrat Bold';
 			font-size: 3.5em;
 			letter-spacing: -0.035em;
@@ -2166,8 +2167,10 @@ input, select, textarea {
 		}
 
 		#main .major h2 {
-			background:  var(--blue);
-			color: var(--xyellow);
+			background:  radial-gradient(#281c3e, #0f051d);
+			border-radius: 100px;
+			padding: 0.2em 0.7em;
+			color: var(--pale-blue);
 		}
 
 /* Footer */
