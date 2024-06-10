@@ -7,20 +7,23 @@
     <link rel="stylesheet" href="../../assets/css/main.css">
 </head>
 <body>
-    <section id="headerInApp">
+    <!-- <section id="headerInApp">
         <h2>Bingo Card Generator</h2>
-    </section>
+    </section> -->
 
     <div class="bingoContainer">
         <div class="bingoInput">
             <div id="matrixSize"></div>
             <br>
+            
+            <div style="text-align: center;">
             <h2><label for="pageCountInput">Number of Pages:</label></h2>
-            <input type="number" id="pageCountInput" value="1" min="1" style="width:50px">
+            <input type="number" id="pageCountInput" value="1" min="1" style="width:50px; background-color: var(--cream); border-radius: 20%;">
             <br>
             <br>
-            <h2>Choose Matrix Size:</h2>
-            <div style="display: inline-flex">
+            <h2 style="align-self: center; margin-bottom: .5em;">Choose Matrix Size:</h2>
+            </div>
+            <div style="text-align: center;">
                 <button id="matrixSize3" style="margin-right: 10px">3x3</button>
                 <button id="matrixSize4" style="margin-right: 10px">4x4</button>
                 <button id="matrixSize5">5x5</button>
@@ -53,11 +56,12 @@
                 const input = document.createElement('input');
                 input.type = 'text';
                 input.placeholder = 'Choice '  + count;
+                input.className = 'matrixCell';
                 matrixInputsDiv.appendChild(input);
-                
+        matrixInputsDiv.appendChild(document.createElement('br')); // Add a line break after each row      
                 count++;
             }
-            matrixInputsDiv.appendChild(document.createElement('br')); // Add a line break after each row      
+            
         }
     }
     
