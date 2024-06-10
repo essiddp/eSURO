@@ -2174,11 +2174,11 @@ input, select, textarea {
 
 		#main .major h2 {
 			background:  var(--blue);
-			color: var(--xyellow);
-			background:  radial-gradient(#281c3e, #0f051d);
+			/* color: var(--xyellow); */
+			/* background:  radial-gradient(var(--gold), rgb(243, 243, 5)); */
 			border-radius: 100px;
 			padding: 0.2em 0.7em;
-			color: var(--pale-blue);
+			color: var(--cream);
 		}
 
 /* Footer */
