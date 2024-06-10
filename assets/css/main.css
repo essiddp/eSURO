@@ -2829,13 +2829,13 @@ input, select, textarea {
 	
 	
 	#chart {
-		width: 60%;
+		width: 40%;
 		height: 100%;
 		position: relative;
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		background-color: var(--blue);
+		/* background-color: var(--blue); */
 		margin-top: 40px;
 	}
 
@@ -2843,7 +2843,7 @@ input, select, textarea {
 		width: 40%;
 		height: 100%;
 		padding: 20px;
-		background-color: var(--blue);
+		/* background-color: var(--blue); */
 		box-sizing: border-box;
 	}
 	
