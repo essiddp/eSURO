@@ -1538,11 +1538,7 @@ input, select, textarea {
 		border-radius: 5px;
 		margin-top: 10px;
 		margin-bottom: 10px;
-<<<<<<< HEAD
 		background: var(--cream);
-=======
-		background: var(--white);
->>>>>>> 4110096f448ab13cdbec8569c70f4db0f6ef1615
 		color: var(--black);
 		width: 30%;
 	}
@@ -2795,7 +2791,7 @@ input, select, textarea {
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
-		background-color: var(--white);
+		background-color: var(--cream);
 		padding: 20px;
 		font-size: larger;
 		border: 1px solid #ccc;
@@ -2854,11 +2850,7 @@ input, select, textarea {
 		margin-bottom: 10px;
 		resize: none;
 		color: var(--black);
-<<<<<<< HEAD
 		background-color: var(--cream);
-=======
-		background-color: var(--white);
->>>>>>> 4110096f448ab13cdbec8569c70f4db0f6ef1615
 		border: 1px solid #ccc;
 		border-radius: 4px;
 		font-size: 14pt;
@@ -3278,7 +3270,7 @@ input, select, textarea {
 	}
 
 	.bingoQPDF {
-		background-color: var(--white);
+		background-color: var(--cream);
 		width: 65%;
 		height: 100%;
 	}
@@ -3292,7 +3284,7 @@ input, select, textarea {
 
 	.indexTitle {
 		font-size:40pt;
-		color: var(--white);
+		color: var(--cream);
 	}
 
 	#edit-questions-form input
