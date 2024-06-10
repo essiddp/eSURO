@@ -1538,11 +1538,7 @@ input, select, textarea {
 		border-radius: 5px;
 		margin-top: 10px;
 		margin-bottom: 10px;
-<<<<<<< HEAD
-		background: var(--cream);
-=======
 		background: var(--white);
->>>>>>> 4110096f448ab13cdbec8569c70f4db0f6ef1615
 		color: var(--black);
 		width: 30%;
 	}
@@ -2854,11 +2850,7 @@ input, select, textarea {
 		margin-bottom: 10px;
 		resize: none;
 		color: var(--black);
-<<<<<<< HEAD
-		background-color: var(--cream);
-=======
 		background-color: var(--white);
->>>>>>> 4110096f448ab13cdbec8569c70f4db0f6ef1615
 		border: 1px solid #ccc;
 		border-radius: 4px;
 		font-size: 14pt;
