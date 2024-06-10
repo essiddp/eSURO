@@ -3289,8 +3289,9 @@ input, select, textarea {
 	/* Triangle */
 
 	#triangle{
-		font-size: larger;
+		font-size: 70%;
 		font-family: 'Montserrat Bold';
+		line-height: 25px;
 	}
 
 	.indexTitle {
