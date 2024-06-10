@@ -11,7 +11,6 @@
         <h2>WORD HUNT</h2>
     </section>
 
-
     <div class="wordHuntContainer">
         <div class="wordHuntInput">
             <form id="wordHuntForm">
@@ -24,6 +23,7 @@
             </form>
             <br>
             <button onclick="window.location.href = '../../index.html'">HOME</button> 
+            <div id = "errorBox"></div>
         </div>
 
         <div class="wordHuntPDF">
@@ -140,13 +140,32 @@
             return Math.floor(Math.random() * max);
         }
     }
-    
+
+
     document.getElementById("wordHuntForm").addEventListener("submit", function(event) {
         event.preventDefault();
         const formData = new FormData(event.target);
         const wordList = formData.get("wordList").split('\n').map(word => word.trim().toUpperCase()).filter(word => word !== '');
         const gridSize = formData.get("gridSize");
-        generateWordHuntPDF(wordList, gridSize);
+        
+        let correctNum = true, errorList = [];
+        Array.from(wordList).forEach(word => 
+        {
+            if (word.length != gridSize)
+            {
+                correctNum = false;
+                errorList.push(word);
+            }
+        });
+
+        if (correctNum)
+        {
+            generateWordHuntPDF(wordList, gridSize); 
+        }
+        else
+        {
+            document.getElementById("errorBox").innerHTML = "Error! The following words exceed the grid size of " + gridSize + ":<br>" + errorList.join('<br>');
+        }
     });
     
     async function generateWordHuntPDF(words, gridSize) {
