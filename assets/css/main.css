@@ -15,7 +15,7 @@
 	--dark-gray: #222831;
 	--yellow: #f7ff11;
 	--green: #1ccf00;
-	--red: #620000;
+	--red: #b51919;
 	--spooky-orange: #9d671b;
 	--spooky-orange-text: #fffec8;
 	--gap: 0.1em;
@@ -179,8 +179,13 @@ input, select, textarea {
 		font-style: italic;
 	}
 
-	h1, h2, h3, h4, h5, h6 {
+	h2, h3, h4, h5, h6 {
 		color: var(--xyellow);
+		font-family: 'Montserrat Bold';
+	}
+
+	h1 {
+		color: var(--cream);
 		font-family: 'Montserrat Bold';
 	}
 
@@ -1533,7 +1538,7 @@ input, select, textarea {
 		border-radius: 5px;
 		margin-top: 10px;
 		margin-bottom: 10px;
-		background: var(--violet);
+		background: var(--white);
 		color: var(--black);
 		width: 30%;
 	}
@@ -2845,7 +2850,7 @@ input, select, textarea {
 		margin-bottom: 10px;
 		resize: none;
 		color: var(--black);
-		background-color: var(--violet);
+		background-color: var(--white);
 		border: 1px solid #ccc;
 		border-radius: 4px;
 		font-size: 14pt;
@@ -2897,6 +2902,7 @@ input, select, textarea {
 	.score {
 		font-family: "Montserrat";
 		font-size: 25px;
+		color: var(--cream);
 		display: flex;
 		align-items: center;
 	}
@@ -2946,7 +2952,7 @@ input, select, textarea {
 	
 	/* question box */
 	.board .column li {
-		background: var(--violet);
+		background: var(--cream);
 		height: 4em;
 		margin-bottom: 0.5em;
 		border-radius: 10px;
@@ -2990,7 +2996,7 @@ input, select, textarea {
 	.card-modal.visible {
 		opacity: 1;
 		pointer-events:initial;
-		background-color: var(--blue);
+		background-color: rgb(7, 7, 56);
 	}
 	.card-modal.showing-result .result {
 		display:block;
@@ -3006,6 +3012,7 @@ input, select, textarea {
 	.result,
 	.card-modal.showing-result form {
 		display:none;
+		color: cream
 	}
 	
 	.card-modal form {
@@ -3049,6 +3056,7 @@ input, select, textarea {
 		display: block;
 		max-width: 100%; /* Adjust for wrapping */
 		word-wrap: break-word;
+		color: var(--cream);
 		margin: 1em 0; /* Add vertical space */
 	}
 	
@@ -3056,6 +3064,7 @@ input, select, textarea {
 		font-family: 'Montserrat Bold';
 		font-size: 60px; 
 		display: block;
+		color: var(--cream);
 		max-width: 100%; /* Adjust for wrapping */
 		word-wrap: break-word;
 		margin-top: 1em; /* Add space between the result and the correct answer */
@@ -3083,7 +3092,7 @@ input, select, textarea {
 	
 	/* Individual choice button */
 	.choices button {
-		background-color: var(--violet);
+		background-color: var(--cream);
 		padding: 10px 20px;      /* Add some padding for better button appearance */
 		margin: 5px 0;           /* Add some margin between buttons */
 		cursor: pointer;
