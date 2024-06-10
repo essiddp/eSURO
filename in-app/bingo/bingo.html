@@ -19,7 +19,7 @@
             
             <div style="text-align: center;">
             <h2><label for="pageCountInput">Number of Pages:</label></h2>
-            <input type="number" id="pageCountInput" value="1" min="1" style="width:50px; background-color: var(--cream); border-radius: 20%;">
+            <input type="number" id="pageCountInput" value="1" min="1" max="50" style="width:50px; background-color: var(--cream); border-radius: 20%;">
             <br>
             <br>
             <h2 style="align-self: center; margin-bottom: .5em;">Choose Matrix Size:</h2>
@@ -208,8 +208,18 @@
         const matrixSizeInput = document.getElementById('matrixSize');
         if (matrixSizeInput) {
             const matrixSize = parseInt(matrixSizeInput.value);
-            const pageCount = parseInt(document.getElementById('pageCountInput').value);
-           const pdfDoc = await createPdfMatrix(matrixSize, pageCount);
+            let pageCount = parseInt(document.getElementById('pageCountInput').value);
+            if (pageCount > 50)
+            {
+                pageCount = 50;
+                document.getElementById('pageCountInput').value = 50; 
+            }
+            else if (pageCount < 1)
+            {
+                pageCount = 1;
+                document.getElementById('pageCountInput').value = 1; 
+            }
+            const pdfDoc = await createPdfMatrix(matrixSize, pageCount);
             const pdfBytes = await pdfDoc.save();
             const pdfBlob = new Blob([pdfBytes], { type: 'application/pdf' });
             const pdfUrl = URL.createObjectURL(pdfBlob);
