@@ -1988,6 +1988,7 @@ input, select, textarea {
 		background: radial-gradient(ellipse at top, var(--gold), transparent),
             radial-gradient(ellipse at bottom, var(--xred), transparent);
 		height: 300px;
+		/* text-shadow: 1px 2px 8px #0000005a; */
 		/* border-bottom: solid 1px #ccc; */
 		padding: 5em 0 4em 0;
 		text-align: center;
@@ -2174,6 +2175,10 @@ input, select, textarea {
 		#main .major h2 {
 			background:  var(--blue);
 			color: var(--xyellow);
+			background:  radial-gradient(#281c3e, #0f051d);
+			border-radius: 100px;
+			padding: 0.2em 0.7em;
+			color: var(--pale-blue);
 		}
 
 /* Footer */
@@ -3184,11 +3189,11 @@ input, select, textarea {
 
 	.wordHuntInput textarea{
 		width: 100%;
-
+		background-color: var(--cream);
 	}
 
 	.wordHuntPDF {
-		background-color: var(--blue);
+		background:  radial-gradient(#281c3e, #0f051d);
 		width: 65%;
 		height: 100%;
 	}
