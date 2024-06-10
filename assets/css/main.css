@@ -2555,7 +2555,7 @@ input, select, textarea {
 				}
 
 				#navPanel .depth-0 {
-					color: var(--black);
+					color: var(--xyellow);
 				}
 
 			body.navPanel-visible #page-wrapper {
