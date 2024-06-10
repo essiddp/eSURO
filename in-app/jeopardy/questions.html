@@ -17,7 +17,7 @@
             <input type="text" id="category-title" name="category-title" required>
             <div class="button-group">
                 <button type="button" id="add-button">Save Category</button>
-                <button type="button" id="save-button" style="display: none;">Save Changes</button>
+                <button type="button" id="save-button" style="display:none">Save Changes</button>
                 <button type="button" class="add-remove-button" id="spawn-button" onclick="addClueField()">Add Question</button>
             </div>
         </div>
@@ -97,8 +97,8 @@
 
         document.getElementById("add-button").addEventListener("click", () => {
             addCategory();
-            document.getElementById("add-button").style.display = "none";
-            document.getElementById("save-button").style.display = "block";
+            document.getElementById("add-button").style.display = "block";
+            document.getElementById("save-button").style.display = "none";
         });
 
         document.getElementById("save-button").addEventListener("click", () => {
