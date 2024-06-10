@@ -3287,7 +3287,11 @@ input, select, textarea {
 	}
 
 	/* Triangle */
-
+	
+	#tri {
+		background:  radial-gradient(#281c3e, #0f051d);
+		height: 100vh;
+	}
 	#triangle{
 		font-size: 70%;
 		font-family: 'Montserrat Bold';
@@ -3303,6 +3307,7 @@ input, select, textarea {
 	{
 		background-color: white;
 	}
+	
 
 /* KEYFRAMES */
 
@@ -3465,4 +3470,18 @@ input, select, textarea {
 
 .pad {
 	padding: 2em;
+}
+
+.imgbutton:hover {
+	transform: scale(1.1);
+	transition: all .30s ease;
+}
+
+.imgbutton {
+	margin: 20px;
+	transition: all .30s ease;
+}
+
+.imgbtn a {
+	text-decoration: none;
 }
