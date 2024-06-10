@@ -151,7 +151,7 @@
         let correctNum = true, errorList = [];
         Array.from(wordList).forEach(word => 
         {
-            if (word.length != gridSize)
+            if (word.length > gridSize)
             {
                 correctNum = false;
                 errorList.push(word);
