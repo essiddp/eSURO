@@ -3455,3 +3455,7 @@ input, select, textarea {
   animation: shortAnimateCloud 20s linear infinite;
 	animation-delay: 2000ms;
 }
+
+.pad {
+	padding: 2em;
+}
