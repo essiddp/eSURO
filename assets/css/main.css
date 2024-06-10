@@ -2784,10 +2784,13 @@ input, select, textarea {
 	/* wheel */
 
 	#container {
+		background:  radial-gradient(#281c3e, #0f051d);
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		width: 100vw;
+		height: 100vh;
+		position: relative;
 	}
 
 	.popup {
@@ -2830,21 +2833,24 @@ input, select, textarea {
 	
 	
 	#chart {
-		width: 40%;
+		width: 60%;
 		height: 100%;
 		position: relative;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		/* background-color: var(--blue); */
-		margin-top: 40px;
 	}
 
 	#inputArea {
+		background-color: var(--violet);
 		width: 40%;
-		height: 100%;
 		padding: 20px;
-		/* background-color: var(--blue); */
+		/* Center align within flex container */
+		height: 100vh;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
 		box-sizing: border-box;
 	}
 	
